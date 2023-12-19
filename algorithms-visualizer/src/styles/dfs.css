@@ -1,0 +1,111 @@
+.dfs-component {
+  padding:20px;
+}
+
+.dfs-component h2 {
+  font-size: 40px;
+}
+.dfs-component main{
+  display: flex;
+  align-items: center;
+}
+.dfs-component .controls{
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 430px;
+}
+.dfs-component .type{
+  display: flex;
+}
+.dfs-component .type button{
+  background: rgb(4, 104, 64);
+  color: white;
+  width: 200px;
+  height: 50px;
+  transition: all .3s ;
+}
+.dfs-component .type button:first-child{
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.dfs-component .type button:last-child{
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.dfs-component .type button:not(.active){
+  background: rgb(5, 131, 83);
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.dfs-component .auto{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+input[type="range"]{
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgb(5, 131, 83);
+  height: 5px;
+  border-radius: 10px;
+  flex: 1;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+}
+input[type="range"]::-moz-range-thumb ,
+input[type="range"]::-webkit-slider-thumb{
+  background: #333;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  margin-top: -15px;
+  border: none;
+}
+.dfs-component .manual{
+  display: flex;
+  justify-content: space-between;
+}
+.dfs-component .manual button{
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(5, 131, 83);
+}
+.dfs-component .manual svg{
+  width: 50px;
+}
+.dfs-component .start{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dfs-component .start span{
+  min-width: 100px;
+}
+.dfs-component .start-vertex{
+  border-bottom: 1px solid rgb(5, 131, 83);
+  /* width: 100px; */
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+  max-width: 180px;
+}
+.dfs-component .start-vertex:focus{
+  outline: none;
+}
+
+.dfs-component .start button{
+  border: 1px solid rgb(5, 131, 83);
+  min-width: 100px;
+  font-size: 16px;
+  height: 50px;
+  border-radius: 15px;
+  transition: all .2s;
+}
+.dfs-component .start button:hover{
+  background: rgb(5, 131, 83);
+  color: white;
+}
