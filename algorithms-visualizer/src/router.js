@@ -2,19 +2,32 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
 import BFS from "./components/Graph/BFS";
 import DFS from "./components/Graph/DFS";
+import Layout from "./components/Layout";
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <Home />,
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
   },
   {
     path: "/graph/bfs",
-    element: <BFS />,
+    element: (
+      <Layout>
+        <BFS />
+      </Layout>
+    ),
   },
   {
     path: "/graph/dfs",
-    element: <DFS />,
+    element: (
+      <Layout>
+        <DFS />
+      </Layout>
+    ),
   },
 ]);
 

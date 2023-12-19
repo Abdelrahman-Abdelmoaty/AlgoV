@@ -9,6 +9,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
   const [directed, setDirected] = useState(false);
   const [weighted, setWeighted] = useState(false);
   const [error, setError] = useState(false);
+
   const handleAddNode = (e) => {
     e.preventDefault();
     if (!input) {
@@ -63,6 +64,31 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
             >
               weighted
             </motion.div>
+            <motion.button
+              onClick={() => {
+                const randomNodes = [];
+                for (let i = 0; i < 10; i++) {
+                  const randNum = Math.floor(Math.random() * 10) + 1;
+                  const newId = randomNodes.length + 1;
+                  randomNodes.push({ id: newId, value: randNum, color: "white", x: ((50 * newId) % 500) + 50, y: ((100 * newId) % 300) + 50 });
+                }
+                setEdges([
+                  { src: 1, dest: 2 },
+                  { src: 2, dest: 3 },
+                  { src: 2, dest: 4 },
+                  { src: 4, dest: 5 },
+                  { src: 4, dest: 6 },
+                  { src: 9, dest: 10 },
+                  { src: 7, dest: 8 },
+                  { src: 10, dest: 1 },
+                ]);
+                setNodes(randomNodes);
+              }}
+              whileHover={{ scale: 1.1 }}
+              className="rounded-lg px-3 py-2 capitalize text-xl font-semibold bg-black text-white"
+            >
+              Randomize
+            </motion.button>
           </div>
           {error && <p className="block text-red-500 mt-1 font-semibold">Please enter a number!</p>}
         </div>
