@@ -17,10 +17,17 @@ export class Queue {
   peek() {
     return this.elements[this.head];
   }
-  get length() {
+  length() {
     return this.tail - this.head;
   }
-  get isEmpty() {
-    return this.length === 0;
+  isEmpty() {
+    return this.length() === 0;
+  }
+  copy() {
+    const newQueue = new Queue();
+    for (let i = this.head; i < this.tail; i++) {
+      newQueue.enqueue(this.elements[i]);
+    }
+    return newQueue;
   }
 }
