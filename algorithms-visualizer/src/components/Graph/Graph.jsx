@@ -3,10 +3,9 @@ import Edge from "./Edge";
 import GraphArea from "./GraphArea";
 import { useState } from "react";
 import { motion } from "framer-motion";
-export default function Graph({ nodes, setNodes, edges, setEdges }) {
+export default function Graph({ nodes, setNodes, edges, setEdges, directed, setDirected }) {
   const [input, setInput] = useState("");
   const [activeEdge, setActiveEdge] = useState({ src: null, dest: null });
-  const [directed, setDirected] = useState(false);
   const [weighted, setWeighted] = useState(false);
   const [error, setError] = useState(false);
 

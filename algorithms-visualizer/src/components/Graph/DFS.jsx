@@ -3,6 +3,7 @@ import { useState } from "react";
 import GraphAlgorithm from "./GraphAlgorithm";
 
 export default function DFS() {
+  const [directed, setDirected] = useState(false);
   const [nodes, setNodes] = useState([]);
   const [adjMat, setAdjMat] = useState([]);
   const [start, setStart] = useState(null);

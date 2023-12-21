@@ -50,7 +50,6 @@ const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
     },
     [circle]
   );
-  const [isDoubleClicked, setIsDoubleClicked] = useState(false);
   return (
     <motion.g
       initial={{ x: 20 }}
@@ -62,13 +61,11 @@ const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
         if (activeEdge.src === null) {
           setActiveEdge({ src: node.id, dest: null });
         }
-        // setIsDoubleClicked(true);
       }}
       onClick={() => {
         if (activeEdge.src && activeEdge.src !== node.id && activeEdge.dest === null) {
           setActiveEdge({ src: null, dest: null });
           setEdges((prev) => [...prev, { src: activeEdge.src, dest: node.id }]);
-          setIsDoubleClicked(false);
         }
       }}
     >

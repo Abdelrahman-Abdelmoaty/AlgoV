@@ -3,6 +3,7 @@ import GraphAlgorithm from "./GraphAlgorithm";
 import React, { useState } from "react";
 
 export default function BFS() {
+  const [directed, setDirected] = useState(false);
   const [nodes, setNodes] = useState([]);
   const [adjMat, setAdjMat] = useState([]);
   const [start, setStart] = useState(null);
@@ -31,7 +32,7 @@ export default function BFS() {
       const newQueue = queue.copy();
       if (!visited.has(node)) {
         visit(node, level);
-        setVisited(new Set(visited).add(node)); 
+        setVisited(new Set(visited).add(node));
       }
 
       for (let i = 0; i < nodes.length; i++) {
@@ -79,8 +80,6 @@ export default function BFS() {
     </div>
   );
 }
-
-
 
 /*
 import { Queue } from "../../lib/utils";
@@ -147,7 +146,6 @@ export default function BFS() {
   );
 }
 */
-
 
 /*
 import { Queue } from "../../lib/utils";
