@@ -31,3 +31,10 @@ header a.active {
   color: white;
   border-color: black;
 }
+.title {
+  color: #333333;
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  text-shadow: 2px 2px 4px #000000;
+}
