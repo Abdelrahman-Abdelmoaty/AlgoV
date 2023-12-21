@@ -105,6 +105,7 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
   useEffect(() => {
     setSwapList(swapList.slice(1, swapList.length));
   }, [test]);
+  console.log(list);
 
   let itemI = 0;
   let areaI = 0;
@@ -128,6 +129,7 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
       itemI = areas[areaI].j;
       areaI++;
     } else {
+      console.log("here", itemI, areaI);
       res.push(
         <li key={list[itemI].id} style={list[itemI]}>
           {list[itemI].value}
@@ -136,6 +138,7 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
       itemI++;
     }
   }
+  console.log(res);
 
   return (
     <div className="list-component">

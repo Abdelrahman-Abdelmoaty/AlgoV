@@ -1,17 +1,18 @@
 import { useState } from "react";
 import List from "./List";
+import uuid from "react-uuid";
 
 export default function InsertionSort() {
   const [list, setList] = useState([
-    { id: "1", value: 1 },
-    { id: "2", value: 2 },
-    { id: "3", value: 3 },
-    { id: "4", value: 1 },
-    { id: "5", value: 2 },
-    { id: "6", value: 3 },
-    { id: "7", value: 1 },
-    { id: "8", value: 2 },
-    { id: "9", value: 3 },
+    { id: uuid(), value: 1 },
+    { id: uuid(), value: 2 },
+    { id: uuid(), value: 3 },
+    { id: uuid(), value: 1 },
+    { id: uuid(), value: 2 },
+    { id: uuid(), value: 3 },
+    { id: uuid(), value: 1 },
+    { id: uuid(), value: 2 },
+    { id: uuid(), value: 3 },
   ]);
   const [swap, setSwap] = useState([]);
 
