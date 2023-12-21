@@ -16,7 +16,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
       setError(true);
     } else {
       const id = nodes.length + 1;
-      setNodes([...nodes, { id: id, value: input, color: "white", x: ((50 * id) % 500) + 50, y: ((100 * id) % 300) + 50 }]);
+      setNodes([...nodes, { id: id, value: input, color: "white", borderColor: "black", x: ((50 * id) % 500) + 50, y: ((100 * id) % 300) + 50 }]);
       setInput("");
     }
   };
@@ -70,7 +70,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
                 for (let i = 0; i < 10; i++) {
                   const randNum = Math.floor(Math.random() * 10) + 1;
                   const newId = randomNodes.length + 1;
-                  randomNodes.push({ id: newId, value: randNum, color: "white", x: ((50 * newId) % 500) + 50, y: ((100 * newId) % 300) + 50 });
+                  randomNodes.push({ id: newId, value: randNum, color: "white", borderColor: "black", x: ((50 * newId) % 500) + 50, y: ((100 * newId) % 300) + 50 });
                 }
                 setEdges([
                   { src: 1, dest: 2 },

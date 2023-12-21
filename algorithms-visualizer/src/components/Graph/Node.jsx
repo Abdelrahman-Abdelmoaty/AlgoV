@@ -72,7 +72,7 @@ const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
         }
       }}
     >
-      <circle cx={circle.cx} cy={circle.cy} r={circle.radius} style={{ fill: `${node.color}`, stroke: "black", strokeWidth }} className="flex items-center justify-center" />
+      <circle cx={circle.cx} cy={circle.cy} r={circle.radius} style={{ fill: node.color, stroke: node.borderColor, strokeWidth }} className="flex items-center justify-center" />
       <text x={circle.cx} y={circle.cy} textAnchor="middle" alignmentBaseline="middle" fontSize="14" fontWeight="bold">
         {node.value}
       </text>
