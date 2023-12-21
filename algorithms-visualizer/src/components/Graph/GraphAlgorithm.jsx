@@ -2,16 +2,7 @@ import { useEffect, useState } from "react";
 import Controls from "./Controls";
 import Graph from "./Graph";
 
-export default function GraphAlgorithm({
-  start,
-  back,
-  next,
-  setAdjMat,
-  startIdx,
-  setStartIdx,
-  nodes,
-  setNodes,
-}) {
+export default function GraphAlgorithm({ start, back, next, setAdjMat, startIdx, setStartIdx, nodes, setNodes }) {
   const [edges, setEdges] = useState([]);
 
   // Creating the Adjacency Matrix
@@ -36,20 +27,9 @@ export default function GraphAlgorithm({
   }, [edges, nodes]);
 
   return (
-    <main>
-      <Controls
-        start={start}
-        startV={nodes[startIdx]?.value}
-        setStart={(val) => setStartIdx(nodes.findIndex((n) => n.value === val))}
-        next={next}
-        back={back}
-      />
-      <Graph
-        nodes={nodes}
-        setNodes={setNodes}
-        edges={edges}
-        setEdges={setEdges}
-      />
+    <main className="flex justify-between items-center">
+      <Controls start={start} startV={nodes[startIdx]?.value} setStart={(val) => setStartIdx(nodes.findIndex((n) => n.value === val))} next={next} back={back} />
+      <Graph nodes={nodes} setNodes={setNodes} edges={edges} setEdges={setEdges} />
     </main>
   );
 }
