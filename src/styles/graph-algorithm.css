@@ -103,3 +103,18 @@ input[type="range"]::-webkit-slider-thumb {
   background: rgb(5, 131, 83);
   color: white;
 }
+.graph-algorithm-component .keys{
+  display: flex;
+  gap: 20px;
+}
+.graph-algorithm-component .keys .key{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.graph-algorithm-component .keys .sample{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0);
+}

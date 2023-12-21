@@ -1,5 +1,5 @@
 // import "rsuite/dist/styles/rsuite-default.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GraphAlgorithm from "./GraphAlgorithm";
 
 export default function DFS() {
@@ -19,18 +19,22 @@ export default function DFS() {
   const currentBorderColor = "red";
   const visitedColor = "rgb(44, 202, 227)";
 
+  useEffect(() => {
+    if (stack.length > 0 && stack[0] === start) dfs();
+  }, [stack]);
+
   const visit = (idx, nodes) => {
     visited.add(idx);
     nodes[idx].color = visitedColor;
   };
 
   const initDfs = () => {
-    setStack([start]);
     setVisited(new Set());
-    dfs();
+    setStack([start]);
   };
 
   const dfs = () => {
+    console.log(stack.length);
     const newNodes = [...nodes];
     if (lastVertex !== null) {
       newNodes[lastVertex].borderColor = defaultBorderColor;
@@ -78,6 +82,20 @@ export default function DFS() {
         startIdx={start}
         nodes={nodes}
         setNodes={setNodes}
+        keys={[
+          {
+            backgroundColor: visitedColor,
+            label: "Visited",
+          },
+          {
+            borderColor: currentBorderColor,
+            label: "Current Vertex",
+          },
+          {
+            borderColor: neighborBorderColor,
+            label: "Neighbors",
+          },
+        ]}
       />
     </div>
   );

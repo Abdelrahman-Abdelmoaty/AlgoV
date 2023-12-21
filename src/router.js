@@ -7,27 +7,17 @@ import Layout from "./components/Layout";
 const router = createBrowserRouter([
   {
     path: "",
-    element: (
-      <Layout>
-        <Home />
-      </Layout>
-    ),
-  },
-  {
-    path: "/graph/bfs",
-    element: (
-      <Layout>
-        <BFS />
-      </Layout>
-    ),
-  },
-  {
-    path: "/graph/dfs",
-    element: (
-      <Layout>
-        <DFS />
-      </Layout>
-    ),
+    element: <Layout />,
+    children: [
+      {
+        path: "/graph/bfs",
+        element: <BFS />,
+      },
+      {
+        path: "/graph/dfs",
+        element: <DFS />,
+      },
+    ],
   },
 ]);
 

@@ -12,6 +12,7 @@ export default function GraphAlgorithm({
   setStartIdx,
   nodes,
   setNodes,
+  keys,
 }) {
   const [edges, setEdges] = useState([]);
 
@@ -55,6 +56,14 @@ export default function GraphAlgorithm({
           setEdges={setEdges}
         />
       </main>
+      <div className="keys">
+        {keys?.map((key) => (
+          <div className="key">
+            <div className="sample" style={key}></div>
+            <span>{key.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
