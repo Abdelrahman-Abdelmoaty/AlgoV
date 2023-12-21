@@ -106,6 +106,7 @@ input[type="range"]::-webkit-slider-thumb {
 .graph-algorithm-component .keys{
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 .graph-algorithm-component .keys .key{
   display: flex;
