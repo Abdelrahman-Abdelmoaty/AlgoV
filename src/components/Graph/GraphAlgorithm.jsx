@@ -38,7 +38,7 @@ export default function GraphAlgorithm({
 
   return (
     <div className="graph-algorithm-component">
-      <main>
+      <main className="flex justify-between items-center">
         <Controls
           start={start}
           startV={nodes[startIdx]?.value}
