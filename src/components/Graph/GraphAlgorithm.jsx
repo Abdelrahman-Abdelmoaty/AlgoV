@@ -1,3 +1,4 @@
+import "../../styles/graph-algorithm.css";
 import { useEffect, useState } from "react";
 import Controls from "./Controls";
 import Graph from "./Graph";
@@ -36,20 +37,24 @@ export default function GraphAlgorithm({
   }, [edges, nodes]);
 
   return (
-    <main>
-      <Controls
-        start={start}
-        startV={nodes[startIdx]?.value}
-        setStart={(val) => setStartIdx(nodes.findIndex((n) => n.value === val))}
-        next={next}
-        back={back}
-      />
-      <Graph
-        nodes={nodes}
-        setNodes={setNodes}
-        edges={edges}
-        setEdges={setEdges}
-      />
-    </main>
+    <div className="graph-algorithm-component">
+      <main>
+        <Controls
+          start={start}
+          startV={nodes[startIdx]?.value}
+          setStart={(val) =>
+            setStartIdx(nodes.findIndex((n) => n.value === val))
+          }
+          next={next}
+          back={back}
+        />
+        <Graph
+          nodes={nodes}
+          setNodes={setNodes}
+          edges={edges}
+          setEdges={setEdges}
+        />
+      </main>
+    </div>
   );
 }
