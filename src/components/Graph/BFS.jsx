@@ -35,7 +35,6 @@ export default function BFS() {
     const newNodes = [...nodes];
     const currentVertex = queue.peek();
 
-
     if (lastVertex !== null) {
       newNodes[lastVertex].borderColor = defaultBorderColor;
       for (let i = 0; i < nodes.length; i++) {
@@ -68,9 +67,9 @@ export default function BFS() {
 
   return (
     <div className="dfs-component">
-      <h2>Breadth First Search Visualization</h2>
+      <h2 className="algorithm-title">Breadth First Search Visualization</h2>
       <GraphAlgorithm
-        back={() => { }}
+        back={() => {}}
         start={() => {
           initBfs();
         }}
@@ -100,9 +99,6 @@ export default function BFS() {
     </div>
   );
 }
-
-
-
 
 /*
 import { Queue } from "../../lib/utils";

@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "sorting",
-        children: [{ path: "insertion", element: <InsertionSort /> }],
+        children: [{ path: "insertion-sort", element: <InsertionSort /> }],
       },
     ],
   },

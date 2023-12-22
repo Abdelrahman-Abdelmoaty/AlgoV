@@ -68,7 +68,7 @@ export default function DFS() {
 
   return (
     <div class="dfs-component">
-      <h2>Depth First Search Visualization</h2>
+      <h2 className="algorithm-title">Depth First Search Visualization</h2>
       <GraphAlgorithm
         back={() => {}}
         start={() => {

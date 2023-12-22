@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap");
+
 .App {
   text-align: center;
 }
@@ -35,4 +37,89 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 6rem;
+  background-color: rgb(5, 131, 83);
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+header nav > ul {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+header nav > ul li:nth-of-type(2),
+header nav > ul li:nth-of-type(3) {
+  position: relative;
+}
+header a,
+header button {
+  font-size: 2rem;
+  padding: 5px 0;
+  font-family: "Courgette", cursive;
+  border-bottom-width: 0;
+  position: relative;
+}
+header button::after,
+header a::after {
+  content: "";
+  width: 0;
+  height: 3px;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  transition: 0.3s ease-in-out;
+}
+
+header a:hover::after {
+  width: 100%;
+}
+header button.active::after,
+header a.active::after {
+  width: 100%;
+}
+.title {
+  font-family: "Courgette", cursive;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.graph-list,
+.sorting-list {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-wrap: nowrap;
+  background-color: rgb(5, 131, 83);
+  padding: 10px;
+  row-gap: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.graph-list:hover,
+.sorting-list:hover {
+  display: flex;
+}
+.graph-list a,
+.sorting-list a {
+  font-size: 1.6rem;
+  padding: 1px 20px;
+}
+.graph:hover + .graph-list {
+  display: flex;
+}
+.sorting:hover + .sorting-list {
+  display: flex;
 }

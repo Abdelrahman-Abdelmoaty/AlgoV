@@ -24,17 +24,13 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
           value: input,
           color: "white",
           borderColor: "black",
-          x: ((50 * id) % 500) + 50,
-          y: ((100 * id) % 300) + 50,
+          x: ((id * 50) % 500) + 50,
+          y: ((id * 50) % 700) + 50,
         },
       ]);
       setInput("");
     }
   };
-  /*
-    BFS
-  
-  */
   return (
     <div className="flex flex-1 justify-between items-center">
       <GraphArea>
@@ -54,24 +50,12 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
           );
         })}
         {nodes.map((node, idx) => {
-          return (
-            <Node
-              key={idx}
-              node={node}
-              setNodes={setNodes}
-              setEdges={setEdges}
-              activeEdge={activeEdge}
-              setActiveEdge={setActiveEdge}
-            />
-          );
+          return <Node key={idx} node={node} setNodes={setNodes} setEdges={setEdges} activeEdge={activeEdge} setActiveEdge={setActiveEdge} />;
         })}
       </GraphArea>
-      <div className="flex flex-col items-center gap-5 justify-center w-44 text-center mx-5">
+      <div className="flex flex-col items-center gap-5 justify-center w-[430px] text-center ml-5">
         <div className="w-full">
-          <form
-            onSubmit={handleAddNode}
-            className="flex items-center justify-between"
-          >
+          <form onSubmit={handleAddNode} className="flex items-center justify-between gap-5">
             <motion.input
               type="text"
               onChange={(e) => {
@@ -79,45 +63,33 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
                 setError(false);
               }}
               value={input}
-              className="border-b-2 border-black outline-none text-center font-semibold text-xl max-w-[100px]"
+              className="border-b-2 border-black outline-none text-center font-semibold text-xl flex-1"
               whileFocus={{ scale: 1.1 }}
             />
-            <motion.button
-              onClick={handleAddNode}
-              className="font-semibold text-xl text-white bg-black rounded-lg px-3 py-2 capitalize"
-              whileHover={{ scale: 1.1 }}
-            >
+            <motion.button onClick={handleAddNode} className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize" whileHover={{ scale: 1.1 }}>
               add
             </motion.button>
           </form>
+          {error && <p className="text-start block text-red-500 mt-1 font-semibold">Please enter a number!</p>}
         </div>
-        {error && (
-          <p className="block text-red-500 mt-1 font-semibold">
-            Please enter a number!
-          </p>
-        )}
         <motion.div
           onClick={() => {
             setDirected((prev) => !prev);
           }}
-          className={`w-full rounded-lg py-2 capitalize text-xl font-semibold ${
-            directed ? "bg-red-500" : "bg-black"
-          } text-white cursor-pointer`}
+          className={`w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md ${directed ? "bg-red-500" : "bg-[rgb(5,131,83)]"} text-white cursor-pointer`}
           whileHover={{ scale: 1.1 }}
         >
           Directed
         </motion.div>
-        <motion.div
+        {/* <motion.div
           onClick={() => {
             setWeighted((prev) => !prev);
           }}
-          className={`w-full rounded-lg py-2 capitalize text-xl font-semibold ${
-            weighted ? "bg-red-500" : "bg-black"
-          } text-white cursor-pointer`}
+          className={`w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md ${weighted ? "bg-red-500" : "bg-[rgb(5,131,83)]"} text-white cursor-pointer`}
           whileHover={{ scale: 1.1 }}
         >
           weighted
-        </motion.div>
+        </motion.div> */}
         <motion.button
           onClick={() => {
             const randomNodes = [];
@@ -146,7 +118,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
             setNodes(randomNodes);
           }}
           whileHover={{ scale: 1.1 }}
-          className="w-full rounded-lg py-2 capitalize text-xl font-semibold bg-black text-white"
+          className="w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md bg-[rgb(5,131,83)] text-white"
         >
           Randomize
         </motion.button>

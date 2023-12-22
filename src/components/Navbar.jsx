@@ -13,14 +13,34 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link className={`${location.pathname === "/graph/BFS" && "active"}`} to="/graph/BFS">
-              BFS
-            </Link>
+            <button className={`${location.pathname.includes("/graph/") && "active"} graph`}>Graph</button>
+            <ul className="graph-list">
+              <li>
+                <Link className={`${location.pathname === "/graph/BFS" && "active"}`} to="/graph/BFS">
+                  BFS
+                </Link>
+              </li>
+              <li>
+                <Link className={`${location.pathname === "/graph/DFS" && "active"}`} to="/graph/DFS">
+                  DFS
+                </Link>
+              </li>
+            </ul>
           </li>
           <li>
-            <Link className={`${location.pathname === "/graph/DFS" && "active"}`} to="/graph/DFS">
-              DFS
-            </Link>
+            <button className={`${location.pathname.includes("/sorting/") && "active"} sorting`}>Sorting</button>
+            <ul className="sorting-list">
+              <li>
+                <Link className={`${location.pathname === "/sorting/bubble-sort" && "active"}`} to="/sorting/bubble-sort">
+                  Bubble Sort
+                </Link>
+              </li>
+              <li>
+                <Link className={`${location.pathname === "/sorting/insertion-sort" && "active"}`} to="/sorting/insertion-sort">
+                  Insertion Sort
+                </Link>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
