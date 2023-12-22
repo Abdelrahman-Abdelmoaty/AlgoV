@@ -97,7 +97,7 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
   }, [swapAgain]);
 
   useEffect(() => {
-    console.log("from here", swapAgain, " list: ", swapList);
+    // console.log("from here", swapAgain, " list: ", swapList);
     if (swapList.length === 0) setSwapAgain(0);
     else if (swapList.length > 0 && swapAgain === 0) setSwapAgain(1);
   }, [swapList, swapAgain]);
@@ -105,7 +105,7 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
   useEffect(() => {
     setSwapList(swapList.slice(1, swapList.length));
   }, [test]);
-  console.log(list);
+  // console.log(list);
 
   let itemI = 0;
   let areaI = 0;
@@ -129,7 +129,7 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
       itemI = areas[areaI].j;
       areaI++;
     } else {
-      console.log("here", itemI, areaI);
+      // console.log("here", itemI, areaI);
       res.push(
         <li key={list[itemI].id} style={list[itemI]}>
           {list[itemI].value}
@@ -138,7 +138,7 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
       itemI++;
     }
   }
-  console.log(res);
+  // console.log(res);
 
   return (
     <div className="list-component">

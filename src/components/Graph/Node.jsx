@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
-  const [circle, setCircle] = useState({ cx: node.x, cy: node.y, radius: 19 });
-  const strokeWidth = 2;
+  const [circle, setCircle] = useState({ cx: node.x, cy: node.y, radius: 25 });
+  const strokeWidth = 4;
   const svgGroupElemRef = useRef(null);
 
   const startDrag = useCallback(
@@ -70,7 +70,7 @@ const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
       }}
     >
       <circle cx={circle.cx} cy={circle.cy} r={circle.radius} style={{ fill: node.color, stroke: node.borderColor, strokeWidth }} className="flex items-center justify-center" />
-      <text x={circle.cx} y={circle.cy} textAnchor="middle" alignmentBaseline="middle" fontSize="14" fontWeight="bold">
+      <text x={circle.cx} y={circle.cy} textAnchor="middle" alignmentBaseline="middle" fontSize="18" fontWeight="bold">
         {node.value}
       </text>
     </motion.g>

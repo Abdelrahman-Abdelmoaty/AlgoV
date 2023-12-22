@@ -124,6 +124,7 @@ input[type="range"]::-webkit-slider-thumb {
   text-align: center;
   font-family: "Courgette", cursive;
   font-weight: 600;
+  font-size: 40px;
   margin: 20px 0;
   color: rgb(4, 104, 64);
 }

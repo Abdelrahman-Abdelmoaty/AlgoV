@@ -4,7 +4,9 @@ export default function Navbar() {
   const location = useLocation();
   return (
     <header>
-      <h1 className="title">AlgoV</h1>
+      <Link href="/">
+        <h1 className="title">AlgoV</h1>
+      </Link>
       <nav>
         <ul>
           <li>
