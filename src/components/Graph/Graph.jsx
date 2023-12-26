@@ -3,7 +3,6 @@ import Edge from "./Edge";
 import GraphArea from "./GraphArea";
 import { useState } from "react";
 import { motion } from "framer-motion";
-//, directed, setDirected
 export default function Graph({ nodes, setNodes, edges, setEdges }) {
   const [input, setInput] = useState("");
   const [activeEdge, setActiveEdge] = useState({ src: null, dest: null });
@@ -24,13 +23,51 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
           value: input,
           color: "white",
           borderColor: "black",
-          x: ((id * 50) % 500) + 50,
-          y: ((id * 50) % 700) + 50,
+          x: ((id * 50) % 400) + 50,
+          y: ((id * 100) % 500) + 50,
         },
       ]);
       setInput("");
     }
   };
+
+  const handleRandomize = () => {
+    setNodes([]);
+    setEdges([]);
+
+    for (let i = 1; i <= 10; i++) {
+      let newX = ((50 * i) % 400) + 50;
+      let newY = ((100 * i) % 500) + 50;
+
+      setNodes((prevNodes) => [
+        ...prevNodes,
+        {
+          id: i,
+          value: i.toString(),
+          color: "white",
+          borderColor: "black",
+          x: newX,
+          y: newY,
+        },
+      ]);
+    }
+
+    for (let i = 1; i <= 10; i++) {
+      const srcNodeId = i;
+      const destNodeId = Math.floor(Math.random() * 10) + 1;
+
+      if (srcNodeId !== destNodeId) {
+        setEdges((prevEdges) => [
+          ...prevEdges,
+          {
+            src: srcNodeId,
+            dest: destNodeId,
+          },
+        ]);
+      }
+    }
+  };
+
   return (
     <div className="flex flex-1 justify-between items-center">
       <GraphArea>
@@ -81,7 +118,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
         >
           Directed
         </motion.div>
-        {/* <motion.div
+        <motion.div
           onClick={() => {
             setWeighted((prev) => !prev);
           }}
@@ -89,34 +126,9 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
           whileHover={{ scale: 1.1 }}
         >
           weighted
-        </motion.div> */}
+        </motion.div>
         <motion.button
-          onClick={() => {
-            const randomNodes = [];
-            for (let i = 0; i < 10; i++) {
-              const randNum = Math.floor(Math.random() * 10) + 1;
-              const newId = randomNodes.length + 1;
-              randomNodes.push({
-                id: newId,
-                value: randNum,
-                color: "white",
-                borderColor: "black",
-                x: ((50 * newId) % 500) + 50,
-                y: ((100 * newId) % 300) + 50,
-              });
-            }
-            setEdges([
-              { src: 1, dest: 2 },
-              { src: 2, dest: 3 },
-              { src: 2, dest: 4 },
-              { src: 4, dest: 5 },
-              { src: 4, dest: 6 },
-              { src: 9, dest: 10 },
-              { src: 7, dest: 8 },
-              { src: 10, dest: 1 },
-            ]);
-            setNodes(randomNodes);
-          }}
+          onClick={handleRandomize}
           whileHover={{ scale: 1.1 }}
           className="w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md bg-[rgb(5,131,83)] text-white"
         >
