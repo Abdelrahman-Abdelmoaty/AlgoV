@@ -31,6 +31,11 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
     }
   };
 
+  const handleClearGraph = () => {
+    setNodes([]);
+    setEdges([]);
+  };
+
   const handleRandomize = () => {
     setNodes([]);
     setEdges([]);
@@ -87,12 +92,24 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
           );
         })}
         {nodes.map((node, idx) => {
-          return <Node key={idx} node={node} setNodes={setNodes} setEdges={setEdges} activeEdge={activeEdge} setActiveEdge={setActiveEdge} />;
+          return (
+            <Node
+              key={idx}
+              node={node}
+              setNodes={setNodes}
+              setEdges={setEdges}
+              activeEdge={activeEdge}
+              setActiveEdge={setActiveEdge}
+            />
+          );
         })}
       </GraphArea>
       <div className="flex flex-col items-center gap-5 justify-center w-[430px] text-center ml-5">
         <div className="w-full">
-          <form onSubmit={handleAddNode} className="flex items-center justify-between gap-5">
+          <form
+            onSubmit={handleAddNode}
+            className="flex items-center justify-between gap-5"
+          >
             <motion.input
               type="text"
               onChange={(e) => {
@@ -103,36 +120,55 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
               className="border-b-2 border-black outline-none text-center font-semibold text-xl flex-1"
               whileFocus={{ scale: 1.1 }}
             />
-            <motion.button onClick={handleAddNode} className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize" whileHover={{ scale: 1.1 }}>
+            <motion.button
+              onClick={handleAddNode}
+              className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
+              whileHover={{ scale: 1.1 }}
+            >
               add
             </motion.button>
           </form>
-          {error && <p className="text-start block text-red-500 mt-1 font-semibold">Please enter a number!</p>}
+          {error && (
+            <p className="text-start block text-red-500 mt-1 font-semibold">
+              Please enter a number!
+            </p>
+          )}
         </div>
         <motion.div
           onClick={() => {
             setDirected((prev) => !prev);
           }}
-          className={`w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md ${directed ? "bg-red-500" : "bg-[rgb(5,131,83)]"} text-white cursor-pointer`}
+          className={`w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md ${
+            directed ? "bg-red-500" : "bg-[rgb(5,131,83)]"
+          } text-white cursor-pointer`}
           whileHover={{ scale: 1.1 }}
         >
           Directed
         </motion.div>
-        <motion.div
+        {/* <motion.div
           onClick={() => {
             setWeighted((prev) => !prev);
           }}
-          className={`w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md ${weighted ? "bg-red-500" : "bg-[rgb(5,131,83)]"} text-white cursor-pointer`}
+          className={`w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md ${
+            weighted ? "bg-red-500" : "bg-[rgb(5,131,83)]"
+          } text-white cursor-pointer`}
           whileHover={{ scale: 1.1 }}
         >
           weighted
-        </motion.div>
+        </motion.div> */}
         <motion.button
           onClick={handleRandomize}
           whileHover={{ scale: 1.1 }}
           className="w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md bg-[rgb(5,131,83)] text-white"
         >
-          Randomize
+          Generate
+        </motion.button>
+        <motion.button
+          onClick={handleClearGraph}
+          whileHover={{ scale: 1.1 }}
+          className="w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md bg-red-500 text-white"
+        >
+          Clear Graph
         </motion.button>
       </div>
     </div>
