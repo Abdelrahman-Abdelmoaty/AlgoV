@@ -9,9 +9,9 @@ export default function DFS() {
   const [start, setStart] = useState(null);
   const [stack, setStack] = useState([]);
   const [lastVertex, setLastVertex] = useState(null);
-
   // const [neighborIdx, setNeighborIdx] = useState(null);
   // const [nodeIdx, setNodeIdx] = useState([]);
+
   const [visited, setVisited] = useState(new Set());
 
   const defaultBorderColor = "black";
@@ -29,8 +29,11 @@ export default function DFS() {
   };
 
   const initDfs = () => {
-    setVisited(new Set());
-    setStack([start]);
+    if (start !== null && start >= 0 && start < nodes.length) {
+      setVisited(new Set());
+      setStack([start]);
+      return false;
+    } else return true;
   };
 
   const dfs = () => {
@@ -71,9 +74,7 @@ export default function DFS() {
       <h2 className="algorithm-title">Depth First Search Visualization</h2>
       <GraphAlgorithm
         back={() => {}}
-        start={() => {
-          initDfs();
-        }}
+        start={initDfs}
         next={() => {
           dfs();
         }}

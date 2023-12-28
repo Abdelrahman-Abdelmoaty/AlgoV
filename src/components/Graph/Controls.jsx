@@ -6,6 +6,7 @@ import { ReactComponent as RightArrow } from "../../assets/svg/right-arrow.svg";
 export default function Controls({ start, startV, setStart, next, back }) {
   const [auto, setAuto] = useState(false);
   const [speed, setSpeed] = useState(5);
+  const [error, setError] = useState(false);
 
   return (
     <div>
@@ -15,11 +16,26 @@ export default function Controls({ start, startV, setStart, next, back }) {
           <input
             className="start-vertex"
             value={startV}
-            onChange={(e) => setStart(e.target.value)}
+            onChange={(e) => {
+              setStart(e.target.value);
+              setError(false);
+            }}
             placeholder="Start Vertex"
           />
-          <button onClick={start}>start</button>
+          <button
+            onClick={() => {
+              const exist = start();
+              setError(exist);
+            }}
+          >
+            start
+          </button>
         </div>
+        {error && (
+          <p className="text-start block text-red-500 mt-1 font-semibold">
+            Node doesn't exist
+          </p>
+        )}
         <div className="type">
           <button
             className={auto ? "active" : ""}

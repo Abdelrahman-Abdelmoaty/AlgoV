@@ -21,7 +21,9 @@ export default function BFS() {
   }, [queue]);
 
   const calculateGradientColor = (levelWithinSameLevel) => {
-    const newColor = initialColor.map((value) => Math.min(255, value + (levelWithinSameLevel % 7) * gradientStep));
+    const newColor = initialColor.map((value) =>
+      Math.min(255, value + (levelWithinSameLevel % 7) * gradientStep)
+    );
     return `rgb(${newColor.join(",")})`;
   };
 
@@ -31,10 +33,13 @@ export default function BFS() {
   };
 
   const initBfs = () => {
-    let newQueue = new Queue();
-    newQueue.enqueue({ vertex: start, level: 0 });
-    setQueue(newQueue);
-    setVisited(new Set());
+    if (start !== null && start >= 0 && start < nodes.length) {
+      let newQueue = new Queue();
+      newQueue.enqueue({ vertex: start, level: 0 });
+      setQueue(newQueue);
+      setVisited(new Set());
+      return false;
+    } else return true;
   };
 
   const bfs = () => {
@@ -72,13 +77,10 @@ export default function BFS() {
     <div className="dfs-component">
       <h2>Breadth First Search Visualization</h2>
       <GraphAlgorithm
-        back={() => { }}
-        start={() => {
-          initBfs();
-        }}
+        back={() => {}}
+        start={initBfs}
         next={() => {
-          if (!queue.isEmpty())
-            bfs();
+          if (!queue.isEmpty()) bfs();
         }}
         setAdjMat={setAdjMat}
         setStartIdx={setStart}
