@@ -28,21 +28,84 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
   const [swapAgain, setSwapAgain] = useState(0);
   const [test, setTest] = useState(false);
 
-  useEffect(() => {
-    if (swapping && swapAgain) {
+  const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
+
+  const swap = (items) =>
+    new Promise(async (resolve, error) => {
       const newList = [...list];
-      newList[swapping.i] = { ...newList[swapping.i], bottom: "60px", left: 0 };
-      newList[swapping.j] = {
-        ...newList[swapping.j],
+      newList[items.i] = { ...newList[items.i], bottom: "60px", left: 0 };
+      newList[items.j] = {
+        ...newList[items.j],
         bottom: "-60px",
         left: 0,
       };
       setList(newList);
-      setState(1);
-    }
-  }, [swapping]);
+      await delay(1000);
+      let num = items.j - items.i;
+      newList[items.i] = {
+        ...newList[items.i],
+        left: `${55 * num}px`,
+      };
+      newList[items.j] = {
+        ...newList[items.j],
+        left: `-${55 * num}px`,
+      };
+      setList(newList);
+
+      await delay(1000);
+      newList[items.i] = { ...newList[items.i], bottom: 0 };
+      newList[items.j] = { ...newList[items.j], bottom: 0 };
+      setList(newList);
+
+      await delay(1000);
+      const iv = { ...newList[items.i], id: uuid(), left: 0, bottom: 0 };
+      newList[items.i] = {
+        ...newList[items.j],
+        id: uuid(),
+        left: 0,
+        bottom: 0,
+      };
+      newList[items.j] = iv;
+      setList(newList);
+      resolve();
+    });
 
   useEffect(() => {
+    swapList.forEach(async (s) => {
+      /* setSwapping(s);
+      const newList = [...list];
+      newList[s.i] = { ...newList[s.i], bottom: "60px", left: 0 };
+      newList[s.j] = {
+        ...newList[s.j],
+        bottom: "-60px",
+        left: 0,
+      }; */
+      //setList(newList);
+      //setState(1);
+      await swap(s);
+      console.log(s.i, s.j);
+    });
+    if (swapList.length) setSwapList([]);
+  }, [swapList]);
+
+  // useEffect(() => {
+  //   if (swapping && swapAgain) {
+  //     console.log(swapping)
+  //     const newList = [...list];
+  //     newList[swapping.i] = { ...newList[swapping.i], bottom: "60px", left: 0 };
+  //     newList[swapping.j] = {
+  //       ...newList[swapping.j],
+  //       bottom: "-60px",
+  //       left: 0,
+  //     };
+  //     setList(newList);
+  //     setState(1);
+  //   }
+  // }, [swapping]);
+
+  useEffect(() => {
+    console.log("s use effect");
+
     switch (state) {
       case 1:
         setTimeout(() => {
@@ -86,25 +149,31 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
     }
   }, [state]);
 
-  useEffect(() => {
-    if (swapList.length > 0) {
-      setSwapping(swapList[0]);
-      setTimeout(() => {
-        setSwapAgain(swapAgain + 1);
-        setTest(!test);
-      }, 2000);
-    }
-  }, [swapAgain]);
+  // useEffect(() => {
+  //   console.log('3 use effect')
 
-  useEffect(() => {
-    // console.log("from here", swapAgain, " list: ", swapList);
-    if (swapList.length === 0) setSwapAgain(0);
-    else if (swapList.length > 0 && swapAgain === 0) setSwapAgain(1);
-  }, [swapList, swapAgain]);
+  //   if (swapList.length > 0) {
+  //     setSwapping(swapList[0]);
+  //     setTimeout(() => {
+  //       setSwapAgain(p => p + 1);
+  //       setTest(!test);
+  //     }, 2000);
+  //   }
+  // }, [swapAgain]);
 
-  useEffect(() => {
-    setSwapList(swapList.slice(1, swapList.length));
-  }, [test]);
+  // useEffect(() => {
+  //   console.log('4 use effect')
+
+  //   // console.log("from here", swapAgain, " list: ", swapList);
+  //   if (swapList.length === 0) setSwapAgain(0);
+  //   else if (swapList.length > 0 && swapAgain === 0) setSwapAgain(1);
+  // }, [swapList, swapAgain]);
+
+  // useEffect(() => {
+  //   console.log('5 use effect')
+
+  //   setSwapList(swapList.slice(1, swapList.length));
+  // }, [test]);
   // console.log(list);
 
   let itemI = 0;

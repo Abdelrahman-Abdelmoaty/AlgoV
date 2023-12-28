@@ -3,6 +3,8 @@ import List from "./List";
 import uuid from "react-uuid";
 
 export default function InsertionSort() {
+  const [test1, setTest1] = useState("")
+  const [test2, setTest2] = useState("")
   const [list, setList] = useState([
     { id: uuid(), value: 1 },
     { id: uuid(), value: 2 },
@@ -14,7 +16,7 @@ export default function InsertionSort() {
     { id: uuid(), value: 2 },
     { id: uuid(), value: 3 },
   ]);
-  const [swap, setSwap] = useState([]);
+  const [swap, setSwap] = useState([{i: 1, j: 2}, {i:3, j:4}, {i:1, j: 3}]);
 
   return (
     <div>
@@ -53,7 +55,10 @@ export default function InsertionSort() {
       >
         create
       </button>
-      <button onClick={() => setSwap([{ i: 1, j: 5 }])}>swap</button>
+      <input value={test1} onChange={(e) => setTest1(e.target.value)} />
+      <input value={test2} onChange={(e) => setTest2(e.target.value)} />
+
+      <button onClick={() => setSwap([...swap, { i: +test1, j: +test2 }])}>swap</button>
       <button onClick={() => setSwap([...swap, { i: 0, j: 2 }])}>swap2</button>
     </div>
   );
