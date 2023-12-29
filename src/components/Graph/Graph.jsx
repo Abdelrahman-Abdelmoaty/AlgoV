@@ -22,17 +22,31 @@ export default function Graph({
       setError(true);
     } else {
       const id = nodes.length + 1;
-      setNodes([
-        ...nodes,
-        {
-          id: id,
-          value: input,
-          color: "white",
-          borderColor: "black",
-          x: (id * 100) % 1200,
-          y: (id * 250) % 600,
-        },
-      ]);
+      if (id < 12) {
+        setNodes([
+          ...nodes,
+          {
+            id: id,
+            value: input,
+            color: "white",
+            borderColor: "black",
+            x: (id * 100) % 1200,
+            y: (id * 250) % 600,
+          },
+        ]);
+      } else {
+        setNodes([
+          ...nodes,
+          {
+            id: id,
+            value: input,
+            color: "white",
+            borderColor: "black",
+            x: ((id * 100) % 1200) + 200,
+            y: ((id * 250) % 600) + 200,
+          },
+        ]);
+      }
       setInput("");
     }
   };
