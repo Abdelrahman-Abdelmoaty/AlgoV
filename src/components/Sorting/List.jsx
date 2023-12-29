@@ -157,6 +157,8 @@ export default function List({
     }
   };
 
+  console.log(list);
+
   let itemI = 0;
   let areaI = 0;
   let res = [];

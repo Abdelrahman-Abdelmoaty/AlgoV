@@ -38,7 +38,7 @@
   align-items: center;
   gap: 15px;
 }
-input[type="range"] {
+input[type=range] {
   -webkit-appearance: none;
   appearance: none;
   background: rgb(5, 131, 83);
@@ -46,12 +46,12 @@ input[type="range"] {
   border-radius: 10px;
   flex: 1;
 }
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
+input[type=range]::-webkit-slider-thumb {
+  /* -webkit-appearance: none;
+  appearance: none; */
 }
-input[type="range"]::-moz-range-thumb,
-input[type="range"]::-webkit-slider-thumb {
+input[type=range]::-moz-range-thumb,
+input[type=range]::-webkit-slider-thumb {
   background: #333;
   height: 15px;
   width: 15px;
