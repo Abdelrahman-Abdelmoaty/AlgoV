@@ -1,6 +1,11 @@
 .list-component{
-    min-height: 400px;
+    min-height: 550px;
+    max-height: 550px;
 }
+    .list-component .list-container{
+    overflow-x: scroll;
+
+    }
 .list-component .list,
 .list-component .list > div{
     list-style: none;
@@ -19,4 +24,8 @@
     left: 0;
     bottom: 0;
     transition: all 1s;
+}
+.list-component .error-text.hidden{
+    display: block;
+    visibility: hidden;
 }

@@ -23,7 +23,14 @@ import { motion } from "framer-motion";
         j: number
     }
 */
-export default function List({ list, setList, swapList, setSwapList, areas }) {
+export default function List({
+  list,
+  setList,
+  swapList,
+  setSwapList,
+  areas,
+  setAreas,
+}) {
   const [swapping, setSwapping] = useState(false);
   const [added, setAdded] = useState(false);
   const [lastI, setLastI] = useState(0);
@@ -135,7 +142,7 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
 
   const handleAddItem = (e) => {
     e.preventDefault();
-    if (!input) {
+    if (!input || isNaN(parseInt(input))) {
       setError(true);
     } else {
       const id = uuid();
@@ -185,7 +192,9 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
 
   return (
     <div className="flex flex-col justify-between items-center gap-10 py-20 list-component">
-      <ul className="list">{res.map((i) => i)}</ul>
+      <div className="flex flex-col justify-between items-start py-20 list-container">
+        <ul className="list">{res.map((i) => i)}</ul>
+      </div>
       {!swapping ? (
         <div className="w-full">
           <form
@@ -199,19 +208,33 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
                 setError(false);
               }}
               value={input}
+              placeholder="Enter the Number"
               className="border-b-2 border-black outline-none text-center font-semibold text-xl flex-1"
               whileFocus={{ scale: 1.1 }}
             />
-            <motion.button
-              onClick={handleAddItem}
-              className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
-              whileHover={{ scale: 1.1 }}
-            >
-              add
-            </motion.button>
+            <div className="flex gap-10">
+              <motion.button
+                onClick={handleAddItem}
+                className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
+                whileHover={{ scale: 1.1 }}
+              >
+                add
+              </motion.button>
+              <motion.button
+                onClick={() => {
+                  setList([]);
+                  setAreas([]);
+                  setSwapList([]);
+                }}
+                className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
+                whileHover={{ scale: 1.1 }}
+              >
+                Reset
+              </motion.button>
+            </div>
           </form>
           {error && (
-            <p className="text-start block text-red-500 mt-1 font-semibold">
+            <p className="text-start block text-red-500 mt-1 font-semibold ">
               Please enter a number!
             </p>
           )}
