@@ -23,14 +23,7 @@ import { motion } from "framer-motion";
         j: number
     }
 */
-export default function List({
-  list,
-  setList,
-  swapList,
-  setSwapList,
-  areas,
-  setAreas,
-}) {
+export default function List({ list, setList, swapList, setSwapList, areas, setAreas }) {
   const [swapping, setSwapping] = useState(false);
   const [added, setAdded] = useState(false);
   const [lastI, setLastI] = useState(0);
@@ -161,7 +154,7 @@ export default function List({
   let areaI = 0;
   let res = [];
   while (itemI < list.length) {
-    console.log(areaI);
+    // console.log(areaI);
     if (areas && areas[areaI] && areas[areaI].i === itemI) {
       res.push(
         <div key={areaI} style={{ border: `2px solid ${areas[areaI].color}` }}>
@@ -197,10 +190,7 @@ export default function List({
       </div>
       {!swapping ? (
         <div className="w-full">
-          <form
-            onSubmit={handleAddItem}
-            className="flex flex-col items-center justify-between gap-5"
-          >
+          <form onSubmit={handleAddItem} className="flex flex-col items-center justify-between gap-5">
             <motion.input
               type="text"
               onChange={(e) => {
@@ -212,12 +202,10 @@ export default function List({
               className="border-b-2 border-black outline-none text-center font-semibold text-xl flex-1"
               whileFocus={{ scale: 1.1 }}
             />
+            {error && <p className="text-start block text-red-500  font-semibold mt-[-20px]">Please enter a number!</p>}
+
             <div className="flex gap-10">
-              <motion.button
-                onClick={handleAddItem}
-                className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
-                whileHover={{ scale: 1.1 }}
-              >
+              <motion.button onClick={handleAddItem} className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize" whileHover={{ scale: 1.1 }}>
                 add
               </motion.button>
               <motion.button
@@ -233,11 +221,6 @@ export default function List({
               </motion.button>
             </div>
           </form>
-          {error && (
-            <p className="text-start block text-red-500 mt-1 font-semibold ">
-              Please enter a number!
-            </p>
-          )}
         </div>
       ) : (
         <></>

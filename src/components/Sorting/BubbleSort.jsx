@@ -21,69 +21,65 @@ export default function BubbleSort() {
     { id: uuid(), value: 3, color: "black", backgroundColor: "white", borderColor: "black" },
   ]);
   const [swap, setSwap] = useState([]);
+  const [areas, setAreas] = useState([]);
+  const changeColor = (i) => {
+    setList((list) => {
+      return list.map((item, idx) => {
+        if (idx === i) {
+          return { ...item, color: "white", backgroundColor: "blue" };
+        } else return item;
+      });
+    });
+  };
+
   const removeColor = (i) => {
     setList((list) => {
       return list.map((item, idx) => {
-        if (idx == i) {
+        if (idx === i) {
           return { ...item, color: "black", backgroundColor: "white" };
         } else return item;
       });
     });
   };
-  const changeColor = (i, speed) => {
+  const makeFullSwap = (i, j, time, swapFlag) => {
     setTimeout(() => {
-      setList((list) => {
-        return list.map((item, idx) => {
-          if (idx == i) {
-            return { ...item, color: "white", backgroundColor: "blue" };
-          } else return item;
-        });
-      });
-      console.log(`add color ${i}`);
-      setTimeout(() => {
-        console.log(`remove color ${i}`);
-        removeColor(i);
-      }, 1000);
-    }, speed * 2000);
+      changeColor(i);
+      changeColor(j);
+      swapFlag && setSwap((prev) => [...prev, { i, j }]);
+      console.log(`Change color ${i} and ${j}`);
+      setTimeout(
+        () => {
+          removeColor(i);
+          removeColor(j);
+        },
+        swapFlag ? 4500 : 500
+      );
+    }, time);
   };
-
   const handleSort = () => {
-    const swaps = [];
+    let time = 1000;
+    const copy = list.map((e) => e.value);
+    console.log(list);
+    console.log(copy);
     for (let i = 0; i < list.length; i++) {
-      for (let j = 0; j < list.length - 1; j++) {
-        changeColor(j, j);
-        changeColor(j + 1, j);
-        if (list[j].value > list[j + 1].value) {
-          swaps.push({ i: j, j: j + 1 });
+      for (let j = 0; j < list.length - i - 1; j++) {
+        if (copy[j] > copy[j + 1]) {
+          makeFullSwap(j, j + 1, time, true);
+          [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
+          time += 5000;
+        } else {
+          makeFullSwap(j, j + 1, time, false);
+          time += 1000;
         }
       }
     }
-    for (let i = 0; i < swaps.length; i++) {}
-    console.log(swaps);
-    // setSwap(swaps);
+    console.log(list);
+    console.log(copy);
   };
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <h2 className="algorithm-title">Bubble Sort</h2>
-      <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} />
-      <button
-        onClick={() =>
-          setList([
-            { id: "1", value: 1 },
-            { id: "2", value: 2 },
-            { id: "3", value: 3 },
-            { id: "4", value: 1 },
-            { id: "5", value: 2 },
-            { id: "6", value: 3 },
-            { id: "7", value: 1 },
-            { id: "8", value: 2 },
-            { id: "9", value: 3 },
-          ])
-        }
-      >
-        create
-      </button>
-      <button onClick={() => setSwap([{ i: 1, j: 5 }])}>swap</button>
+      <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} />
       <motion.button onClick={handleSort} whileHover={{ scale: 1.1 }} className="bg-[rgb(5,131,83)] text-white px-5 py-4 text-2xl font-semibold rounded-xl">
         Sort
       </motion.button>
