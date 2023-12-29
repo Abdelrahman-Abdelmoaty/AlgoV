@@ -23,7 +23,7 @@ export default function Controls({ start, startV, setStart, next, back, end }) {
     <div>
       <div className="controls">
         <div className="start">
-          <span>Start Vertex: </span>
+          <span>Start Vertex:</span>
           <input
             className="start-vertex"
             value={startV}

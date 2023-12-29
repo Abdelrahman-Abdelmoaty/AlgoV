@@ -10,15 +10,69 @@ import { motion } from "framer-motion";
 // borderColor?: string,
 export default function BubbleSort() {
   const [list, setList] = useState([
-    { id: uuid(), value: 1, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 2, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 3, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 6, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 5, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 4, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 9, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 10, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 3, color: "black", backgroundColor: "white", borderColor: "black" },
+    {
+      id: uuid(),
+      value: 1,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 2,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 3,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 6,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 5,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 4,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 9,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 10,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 3,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
   ]);
   const [swap, setSwap] = useState([]);
   const removeColor = (i) => {
@@ -65,7 +119,12 @@ export default function BubbleSort() {
   return (
     <div>
       <h2 className="algorithm-title">Bubble Sort</h2>
-      <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} />
+      <List
+        list={list}
+        setList={setList}
+        setSwapList={setSwap}
+        swapList={swap}
+      />
       <button
         onClick={() =>
           setList([
@@ -84,7 +143,11 @@ export default function BubbleSort() {
         create
       </button>
       <button onClick={() => setSwap([{ i: 1, j: 5 }])}>swap</button>
-      <motion.button onClick={handleSort} whileHover={{ scale: 1.1 }} className="bg-[rgb(5,131,83)] text-white px-5 py-4 text-2xl font-semibold rounded-xl">
+      <motion.button
+        onClick={handleSort}
+        whileHover={{ scale: 1.1 }}
+        className="bg-[rgb(5,131,83)] text-white px-5 py-4 text-2xl font-semibold rounded-xl"
+      >
         Sort
       </motion.button>
     </div>

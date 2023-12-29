@@ -29,8 +29,8 @@ export default function Graph({
           value: input,
           color: "white",
           borderColor: "black",
-          x: ((id * 50) % 400) + 50,
-          y: ((id * 100) % 500) + 50,
+          x: (id * 100) % 1200,
+          y: (id * 250) % 600,
         },
       ]);
       setInput("");
@@ -47,8 +47,8 @@ export default function Graph({
     setEdges([]);
 
     for (let i = 1; i <= 10; i++) {
-      let newX = ((50 * i) % 400) + 50;
-      let newY = ((100 * i) % 500) + 50;
+      let newX = (100 * i) % 1200;
+      let newY = (250 * i) % 700;
 
       setNodes((prevNodes) => [
         ...prevNodes,
@@ -110,7 +110,7 @@ export default function Graph({
           );
         })}
       </GraphArea>
-      <div className="flex flex-col items-center gap-5 justify-center w-[430px] text-center ml-5">
+      <div className="flex flex-col items-center gap-5 justify-center w-[300px] text-center ml-5">
         <div className="w-full">
           <form
             onSubmit={handleAddNode}
@@ -118,12 +118,13 @@ export default function Graph({
           >
             <motion.input
               type="text"
+              placeholder="enter Node"
               onChange={(e) => {
                 setInput(e.target.value);
                 setError(false);
               }}
               value={input}
-              className="border-b-2 border-black outline-none text-center font-semibold text-xl flex-1"
+              className=" border-b-2 border-black outline-none text-center font-semibold text-xl flex-1 w-20 graph-input"
               whileFocus={{ scale: 1.1 }}
             />
             <motion.button

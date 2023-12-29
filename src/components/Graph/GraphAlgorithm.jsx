@@ -41,33 +41,32 @@ export default function GraphAlgorithm({
   return (
     <div className="graph-algorithm-component">
       <main className="flex justify-between items-center">
-        <Controls
-          start={start}
-          startV={nodes[startIdx]?.value}
-          setStart={(val) =>
-            setStartIdx(nodes.findIndex((n) => n.value === val))
-          }
-          next={next}
-          back={back}
-          end={end}
-        />
+        <aside>
+          <Controls
+            start={start}
+            startV={nodes[startIdx]?.value}
+            setStart={(val) =>
+              setStartIdx(nodes.findIndex((n) => n.value === val))
+            }
+            next={next}
+            back={back}
+          />
+          <div className="keys">
+            {keys?.map((key) => (
+              <div className="key">
+                <div className="sample" style={key}></div>
+                <span>{key.label}</span>
+              </div>
+            ))}
+          </div>
+        </aside>
         <Graph
           nodes={nodes}
           setNodes={setNodes}
           edges={edges}
           setEdges={setEdges}
-          directed={directed}
-          setDirected={setDirected}
         />
       </main>
-      <div className="keys">
-        {keys?.map((key) => (
-          <div className="key">
-            <div className="sample" style={key}></div>
-            <span>{key.label}</span>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
