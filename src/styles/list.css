@@ -1,8 +1,5 @@
 .list-component{
-    min-height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 400px;
 }
 .list-component .list,
 .list-component .list > div{
