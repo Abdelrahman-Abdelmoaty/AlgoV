@@ -7,6 +7,7 @@ export default function DFS() {
   const [nodes, setNodes] = useState([]);
   const [adjMat, setAdjMat] = useState([]);
   const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(false);
   const [stack, setStack] = useState([]);
   const [lastVertex, setLastVertex] = useState(null);
   // const [neighborIdx, setNeighborIdx] = useState(null);
@@ -65,6 +66,7 @@ export default function DFS() {
       }
       setStack(newStack);
     } else {
+      setEnd(true);
     }
     setNodes(newNodes);
   };

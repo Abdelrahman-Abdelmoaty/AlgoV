@@ -13,8 +13,10 @@ export default function GraphAlgorithm({
   nodes,
   setNodes,
   keys,
+  end,
 }) {
   const [edges, setEdges] = useState([]);
+  const [directed, setDirected] = useState(false);
 
   // Creating the Adjacency Matrix
   useEffect(() => {
@@ -29,9 +31,8 @@ export default function GraphAlgorithm({
       const idx1 = nodes.findIndex((n) => n.id === edge.src);
       const idx2 = nodes.findIndex((n) => n.id === edge.dest);
 
-      // TODO: check if not directed
       newAdjMat[idx1][idx2] = 1;
-      newAdjMat[idx2][idx1] = 1;
+      if (!directed) newAdjMat[idx2][idx1] = 1;
     });
 
     setAdjMat(newAdjMat);
@@ -48,12 +49,15 @@ export default function GraphAlgorithm({
           }
           next={next}
           back={back}
+          end={end}
         />
         <Graph
           nodes={nodes}
           setNodes={setNodes}
           edges={edges}
           setEdges={setEdges}
+          directed={directed}
+          setDirected={setDirected}
         />
       </main>
       <div className="keys">
