@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../styles/list.css";
 import uuid from "react-uuid";
+import { motion } from "framer-motion";
 /*
     Sample List Item: {
         id: string,
@@ -23,12 +24,11 @@ import uuid from "react-uuid";
     }
 */
 export default function List({ list, setList, swapList, setSwapList, areas }) {
-  const [state, setState] = useState(0);
-  // const [swapping, setSwapping] = useState(null);
-  const [swapAgain, setSwapAgain] = useState(0);
   const [swapping, setSwapping] = useState(false);
   const [added, setAdded] = useState(false);
   const [lastI, setLastI] = useState(0);
+  const [error, setError] = useState(false);
+  const [input, setInput] = useState("");
 
   const swap = (i, len) => {
     setTimeout(() => {
@@ -133,11 +133,29 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
     }
   }, [swapping]);
 
+  const handleAddItem = (e) => {
+    e.preventDefault();
+    if (!input) {
+      setError(true);
+    } else {
+      const id = uuid();
+      setList([
+        ...list,
+        {
+          id: id,
+          value: parseInt(input),
+        },
+      ]);
+      setInput("");
+    }
+  };
+
   let itemI = 0;
   let areaI = 0;
   let res = [];
   while (itemI < list.length) {
-    if (areas && areas[areaI].i === itemI) {
+    console.log(areaI);
+    if (areas && areas[areaI] && areas[areaI].i === itemI) {
       res.push(
         <div key={areaI} style={{ border: `2px solid ${areas[areaI].color}` }}>
           {Array(areas[areaI].j - areas[areaI].i)
@@ -166,8 +184,37 @@ export default function List({ list, setList, swapList, setSwapList, areas }) {
   }
 
   return (
-    <div className="list-component">
+    <div className="flex flex-col gap-10 py-10 list-component">
       <ul className="list">{res.map((i) => i)}</ul>
+      <div className="w-full">
+        <form
+          onSubmit={handleAddItem}
+          className="flex flex-col items-center justify-between gap-5"
+        >
+          <motion.input
+            type="text"
+            onChange={(e) => {
+              setInput(e.target.value);
+              setError(false);
+            }}
+            value={input}
+            className="border-b-2 border-black outline-none text-center font-semibold text-xl flex-1"
+            whileFocus={{ scale: 1.1 }}
+          />
+          <motion.button
+            onClick={handleAddItem}
+            className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
+            whileHover={{ scale: 1.1 }}
+          >
+            add
+          </motion.button>
+        </form>
+        {error && (
+          <p className="text-start block text-red-500 mt-1 font-semibold">
+            Please enter a number!
+          </p>
+        )}
+      </div>
     </div>
   );
 }
