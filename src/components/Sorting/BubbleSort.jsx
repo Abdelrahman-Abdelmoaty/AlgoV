@@ -10,15 +10,69 @@ import { motion } from "framer-motion";
 // borderColor?: string,
 export default function BubbleSort() {
   const [list, setList] = useState([
-    { id: uuid(), value: 1, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 2, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 3, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 6, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 5, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 4, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 9, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 10, color: "black", backgroundColor: "white", borderColor: "black" },
-    { id: uuid(), value: 3, color: "black", backgroundColor: "white", borderColor: "black" },
+    {
+      id: uuid(),
+      value: 1,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 2,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 3,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 6,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 5,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 4,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 9,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 10,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 3,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
   ]);
   const [swap, setSwap] = useState([]);
   const [areas, setAreas] = useState([]);

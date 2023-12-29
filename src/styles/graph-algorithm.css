@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 430px;
+  width: 340px;
 }
 .graph-algorithm-component .type {
   display: flex;
@@ -69,7 +69,7 @@ input[type="range"]::-webkit-slider-thumb {
   background: rgb(5, 131, 83);
 }
 .graph-algorithm-component .manual svg {
-  width: 30px;
+  width: 40px;
 }
 .graph-algorithm-component .start {
   display: flex;
@@ -77,15 +77,16 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 10px;
 }
 .graph-algorithm-component .start span {
-  min-width: 100px;
+  min-width: 85px;
 }
-.graph-algorithm-component .start-vertex {
+.graph-algorithm-component .start-vertex,
+.graph-input {
   border-bottom: 1px solid rgb(5, 131, 83);
   /* width: 100px; */
   padding: 5px;
   font-size: 16px;
   text-align: center;
-  max-width: 180px;
+  max-width: 135px;
 }
 .graph-algorithm-component .start-vertex:focus {
   outline: none;
@@ -93,7 +94,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .graph-algorithm-component .start button {
   border: 1px solid rgb(5, 131, 83);
-  min-width: 100px;
+  min-width: 84px;
   font-size: 16px;
   height: 50px;
   border-radius: 15px;
@@ -104,9 +105,11 @@ input[type="range"]::-webkit-slider-thumb {
   color: white;
 }
 .graph-algorithm-component .keys {
+  flex-direction: column-reverse;
   display: flex;
-  gap: 20px;
+  gap: 10px;
   flex-wrap: wrap;
+  height: 200px;
 }
 .graph-algorithm-component .keys .key {
   display: flex;

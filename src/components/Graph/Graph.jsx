@@ -3,11 +3,17 @@ import Edge from "./Edge";
 import GraphArea from "./GraphArea";
 import { useState } from "react";
 import { motion } from "framer-motion";
-export default function Graph({ nodes, setNodes, edges, setEdges }) {
+export default function Graph({
+  nodes,
+  setNodes,
+  edges,
+  setEdges,
+  directed,
+  setDirected,
+}) {
   const [input, setInput] = useState("");
   const [activeEdge, setActiveEdge] = useState({ src: null, dest: null });
   const [weighted, setWeighted] = useState(false);
-  const [directed, setDirected] = useState(false);
   const [error, setError] = useState(false);
 
   const handleAddNode = (e) => {
@@ -16,17 +22,31 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
       setError(true);
     } else {
       const id = nodes.length + 1;
-      setNodes([
-        ...nodes,
-        {
-          id: id,
-          value: input,
-          color: "white",
-          borderColor: "black",
-          x: ((id * 50) % 400) + 50,
-          y: ((id * 100) % 500) + 50,
-        },
-      ]);
+      if (id < 12) {
+        setNodes([
+          ...nodes,
+          {
+            id: id,
+            value: input,
+            color: "white",
+            borderColor: "black",
+            x: (id * 100) % 1200,
+            y: (id * 250) % 600,
+          },
+        ]);
+      } else {
+        setNodes([
+          ...nodes,
+          {
+            id: id,
+            value: input,
+            color: "white",
+            borderColor: "black",
+            x: ((id * 100) % 1200) + 200,
+            y: ((id * 250) % 600) + 200,
+          },
+        ]);
+      }
       setInput("");
     }
   };
@@ -41,8 +61,8 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
     setEdges([]);
 
     for (let i = 1; i <= 10; i++) {
-      let newX = ((50 * i) % 400) + 50;
-      let newY = ((100 * i) % 500) + 50;
+      let newX = (100 * i) % 1200;
+      let newY = (250 * i) % 700;
 
       setNodes((prevNodes) => [
         ...prevNodes,
@@ -104,7 +124,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
           );
         })}
       </GraphArea>
-      <div className="flex flex-col items-center gap-5 justify-center w-[430px] text-center ml-5">
+      <div className="flex flex-col items-center gap-5 justify-center w-[300px] text-center ml-5">
         <div className="w-full">
           <form
             onSubmit={handleAddNode}
@@ -112,12 +132,13 @@ export default function Graph({ nodes, setNodes, edges, setEdges }) {
           >
             <motion.input
               type="text"
+              placeholder="enter Node"
               onChange={(e) => {
                 setInput(e.target.value);
                 setError(false);
               }}
               value={input}
-              className="border-b-2 border-black outline-none text-center font-semibold text-xl flex-1"
+              className=" border-b-2 border-black outline-none text-center font-semibold text-xl flex-1 w-20 graph-input"
               whileFocus={{ scale: 1.1 }}
             />
             <motion.button

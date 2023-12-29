@@ -9,27 +9,21 @@ export default function BFS() {
   const [queue, setQueue] = useState(new Queue());
   const [lastVertex, setLastVertex] = useState(null);
   const [visited, setVisited] = useState(new Set());
+  const [levelColors, setLevelColors] = useState({ 0: "rgb(44, 202, 227)" });
 
   const defaultBorderColor = "black";
   const neighborBorderColor = "#08ff00";
   const currentBorderColor = "red";
-  const initialColor = [0, 150, 170];
-  const gradientStep = 35;
 
   useEffect(() => {
     if (!queue.isEmpty()) bfs();
   }, [queue]);
 
-  const calculateGradientColor = (levelWithinSameLevel) => {
-    const newColor = initialColor.map((value) =>
-      Math.min(255, value + (levelWithinSameLevel % 7) * gradientStep)
-    );
-    return `rgb(${newColor.join(",")})`;
-  };
-
-  const visit = (idx, nodes, level) => {
-    visited.add(idx);
-    nodes[idx].color = calculateGradientColor(level);
+  const visit = (idx, level) => {
+    const newNodes = [...nodes];
+    const color = levelColors[level];
+    newNodes[idx].color = color;
+    setNodes(newNodes);
   };
 
   const initBfs = () => {
@@ -38,6 +32,7 @@ export default function BFS() {
       newQueue.enqueue({ vertex: start, level: 0 });
       setQueue(newQueue);
       setVisited(new Set());
+      bfs();
       return false;
     } else return true;
   };
@@ -47,7 +42,8 @@ export default function BFS() {
     if (!queue.isEmpty()) {
       const { vertex: currentVertex, level } = queue.peek();
       if (!visited.has(currentVertex)) {
-        visit(currentVertex, newNodes, level);
+        visit(currentVertex, level);
+        setVisited(new Set(visited).add(currentVertex));
       }
       if (lastVertex !== null) {
         newNodes[lastVertex].borderColor = defaultBorderColor;
@@ -71,11 +67,41 @@ export default function BFS() {
       setLastVertex(currentVertex);
       queue.dequeue();
       setNodes(newNodes);
+
+      if (!levelColors.hasOwnProperty(level + 1)) {
+        setLevelColors((prev) => ({
+          ...prev,
+          [level + 1]: getRandomColor(),
+        }));
+      }
     }
   };
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++)
+      color += letters[Math.floor(Math.random() * 16)];
+    return color;
+  };
+
+  const keys = [
+    {
+      borderColor: currentBorderColor,
+      label: "Current node",
+    },
+    {
+      borderColor: neighborBorderColor,
+      label: "Neighbors",
+    },
+    ...Object.keys(levelColors).map((level, index) => ({
+      backgroundColor: levelColors[level],
+      label: `Level ${index}`,
+    })),
+  ];
   return (
     <div className="dfs-component">
-      <h2>Breadth First Search Visualization</h2>
+      <h2 className="algorithm-title">Breadth First Search Visualization</h2>
       <GraphAlgorithm
         back={() => {}}
         start={initBfs}
@@ -87,20 +113,7 @@ export default function BFS() {
         startIdx={start}
         nodes={nodes}
         setNodes={setNodes}
-        keys={[
-          {
-            backgroundColor: calculateGradientColor(0),
-            label: "Visited",
-          },
-          {
-            borderColor: currentBorderColor,
-            label: "Current Vertex",
-          },
-          {
-            borderColor: neighborBorderColor,
-            label: "Neighbors",
-          },
-        ]}
+        keys={keys}
       />
     </div>
   );

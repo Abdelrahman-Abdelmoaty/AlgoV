@@ -13,8 +13,10 @@ export default function GraphAlgorithm({
   nodes,
   setNodes,
   keys,
+  end,
 }) {
   const [edges, setEdges] = useState([]);
+  const [directed, setDirected] = useState(false);
 
   // Creating the Adjacency Matrix
   useEffect(() => {
@@ -29,9 +31,8 @@ export default function GraphAlgorithm({
       const idx1 = nodes.findIndex((n) => n.id === edge.src);
       const idx2 = nodes.findIndex((n) => n.id === edge.dest);
 
-      // TODO: check if not directed
       newAdjMat[idx1][idx2] = 1;
-      newAdjMat[idx2][idx1] = 1;
+      if (!directed) newAdjMat[idx2][idx1] = 1;
     });
 
     setAdjMat(newAdjMat);
@@ -40,15 +41,25 @@ export default function GraphAlgorithm({
   return (
     <div className="graph-algorithm-component">
       <main className="flex justify-between items-center">
-        <Controls
-          start={start}
-          startV={nodes[startIdx]?.value}
-          setStart={(val) =>
-            setStartIdx(nodes.findIndex((n) => n.value === val))
-          }
-          next={next}
-          back={back}
-        />
+        <aside>
+          <Controls
+            start={start}
+            startV={nodes[startIdx]?.value}
+            setStart={(val) =>
+              setStartIdx(nodes.findIndex((n) => n.value === val))
+            }
+            next={next}
+            back={back}
+          />
+          <div className="keys">
+            {keys?.map((key) => (
+              <div className="key">
+                <div className="sample" style={key}></div>
+                <span>{key.label}</span>
+              </div>
+            ))}
+          </div>
+        </aside>
         <Graph
           nodes={nodes}
           setNodes={setNodes}
@@ -56,14 +67,6 @@ export default function GraphAlgorithm({
           setEdges={setEdges}
         />
       </main>
-      <div className="keys">
-        {keys?.map((key) => (
-          <div className="key">
-            <div className="sample" style={key}></div>
-            <span>{key.label}</span>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }

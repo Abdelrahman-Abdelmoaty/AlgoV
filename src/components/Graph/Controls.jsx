@@ -1,18 +1,29 @@
 import "../../styles/dfs.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactComponent as LeftArrow } from "../../assets/svg/left-arrow.svg";
 import { ReactComponent as RightArrow } from "../../assets/svg/right-arrow.svg";
 
-export default function Controls({ start, startV, setStart, next, back }) {
+export default function Controls({ start, startV, setStart, next, back, end }) {
   const [auto, setAuto] = useState(false);
   const [speed, setSpeed] = useState(5);
   const [error, setError] = useState(false);
+  const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+    if (auto && speed < 11 && !end && startV)
+      setTimeout(() => {
+        if (auto) {
+          next();
+          setFinished(!finished);
+        }
+      }, 1000 * (11 - speed));
+  }, [finished, auto]);
 
   return (
     <div>
       <div className="controls">
         <div className="start">
-          <span>Start Vertex: </span>
+          <span>Start Vertex:</span>
           <input
             className="start-vertex"
             value={startV}
@@ -67,7 +78,11 @@ export default function Controls({ start, startV, setStart, next, back }) {
             <button onClick={back}>
               <LeftArrow />
             </button>
-            <button onClick={next}>
+            <button
+              onClick={() => {
+                if (!end) next();
+              }}
+            >
               <RightArrow />
             </button>
           </div>
