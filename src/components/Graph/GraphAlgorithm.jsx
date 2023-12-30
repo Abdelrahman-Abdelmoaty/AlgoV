@@ -34,7 +34,7 @@ export default function GraphAlgorithm({ start, back, next, setAdjMat, startIdx,
           <Controls start={start} startV={nodes[startIdx]?.value} setStart={(val) => setStartIdx(nodes.findIndex((n) => n.value === val))} next={next} back={back} />
           <div className="keys">
             {keys?.map((key) => (
-              <div className="key">
+              <div className="key" key={key.label}>
                 <div className="sample" style={key}></div>
                 <span>{key.label}</span>
               </div>

@@ -1,31 +1,30 @@
-.list-component{
-    min-height: 550px;
-    max-height: 550px;
+/* .list-component {
+  min-height: 550px;
+  max-height: 550px;
+} */
+.list-component .list-container {
+  overflow-x: scroll;
 }
-    .list-component .list-container{
-    overflow-x: scroll;
-
-    }
 .list-component .list,
-.list-component .list > div{
-    list-style: none;
-    display: flex;
+.list-component .list > div {
+  list-style: none;
+  display: flex;
 }
-.list-component .list li{
-    font-size: 20px;
-    width: 55px;
-    height: 55px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.list-component .list li {
+  font-size: 20px;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    border: 2px solid black;
-    position: relative;
-    left: 0;
-    bottom: 0;
-    transition: all 1s;
+  border: 2px solid black;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  transition: all 1s;
 }
-.list-component .error-text.hidden{
-    display: block;
-    visibility: hidden;
+.list-component .error-text.hidden {
+  display: block;
+  visibility: hidden;
 }

@@ -16,23 +16,29 @@ export default function Controls({ start, startV, setStart, next, back, end }) {
           next();
           setFinished(!finished);
         }
-      }, 1000 * (11 - speed));
+      }, 500 * (11 - speed));
   }, [finished, auto]);
 
   return (
     <div>
       <div className="controls">
         <div className="start">
-          <span>Start Vertex:</span>
-          <input
-            className="start-vertex"
-            value={startV}
-            onChange={(e) => {
-              setStart(e.target.value);
-              setError(false);
-            }}
-            placeholder="Start Vertex"
-          />
+          {setStart !== undefined ? (
+            <>
+              <span>Start Vertex:</span>
+              <input
+                className="start-vertex"
+                value={startV}
+                onChange={(e) => {
+                  setStart(e.target.value);
+                  setError(false);
+                }}
+                placeholder="Start Vertex"
+              />
+            </>
+          ) : (
+            <></>
+          )}
           <button
             onClick={() => {
               const exist = start();

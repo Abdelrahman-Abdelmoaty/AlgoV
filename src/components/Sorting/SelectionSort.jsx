@@ -1,27 +1,25 @@
 import { useState } from "react";
 import List from "./List";
 import uuid from "react-uuid";
-import Controls from "../Graph/Controls";
 import { motion } from "framer-motion";
 import "../../styles/graph-algorithm.css";
 
-export default function SortingAlgorithm() {
-  const [list, setList] = useState([]);
+const generateRandomList = () => {
+  const randomValue = () => Math.floor(Math.random() * 10) + 1;
 
+  return Array.from({ length: 9 }, (_, index) => ({
+    id: uuid(),
+    value: randomValue(),
+    color: "black",
+    backgroundColor: "white",
+    borderColor: "black",
+  }));
+};
+
+export default function SelectionSort() {
+  const [list, setList] = useState([]);
   const [swap, setSwap] = useState([]);
   const [areas, setAreas] = useState([]);
-
-  const generateRandomList = () => {
-    const randomValue = () => Math.floor(Math.random() * 10) + 1;
-
-    return Array.from({ length: 9 }, (_, index) => ({
-      id: uuid(),
-      value: randomValue(),
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    }));
-  };
 
   const changeColor = (i, color) => {
     setList((list) => {
@@ -34,12 +32,6 @@ export default function SortingAlgorithm() {
         } else return item;
       });
     });
-  };
-
-  const resetColors = (start, end) => {
-    for (let i = start; i <= end; i++) {
-      changeColor(i, "black");
-    }
   };
 
   const makeFullSwap = (i, j, time, swapFlag, callback) => {
@@ -57,57 +49,61 @@ export default function SortingAlgorithm() {
       );
     }, time);
   };
-  const handleInsertionSort = async () => {
+
+  const handleSelectionSort = async () => {
     const copy = [...list];
     const n = copy.length;
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    changeColor(0, "green");
-    await delay(1000);
-    changeColor(0, "blue");
-    await delay(1000);
-    for (let i = 1; i < n; i++) {
-      let key = copy[i].value;
-      let j = i - 1;
-
+    for (let i = 0; i < n - 1; i++) {
+      let minIndex = i;
+      changeColor(i, "blue");
+      await delay(1000);
       changeColor(i, "green");
-
-      while (j >= 0 && copy[j].value > key) {
-        resetColors(0, n - 1);
+      for (let j = i + 1; j < n; j++) {
+        changeColor(j, "blue");
+        await delay(1000);
+        if (copy[j].value < copy[minIndex].value) {
+          if (minIndex == i) changeColor(minIndex, "grey");
+          else changeColor(minIndex, "black");
+          minIndex = j;
+          changeColor(minIndex, "green");
+        } else {
+          changeColor(j, "black");
+        }
+      }
+      if (minIndex !== i) {
         await new Promise((resolve) =>
-          makeFullSwap(j, j + 1, 1000, true, () => {
+          makeFullSwap(i, minIndex, 1000, true, () => {
+            [copy[i], copy[minIndex]] = [copy[minIndex], copy[i]];
             resolve();
           })
         );
-        j = j - 1;
-      }
-      await delay(1000);
-      for (let k = i; k >= 0; k--) changeColor(k, "blue");
-      // resetColors(0, n - 1);
-
-      await delay(1000);
+      } else changeColor(i, "black");
     }
+    changeColor(n - 1, "black");
   };
-
-  const keys = [
-    {
-      backgroundColor: "grey",
-      label: "swapping till its position",
-    },
-    {
-      backgroundColor: "green",
-      label: "current item to insert",
-    },
-    {
-      backgroundColor: "blue",
-      label: "sorted subarray till now",
-    },
-  ];
 
   const handleGenerateRandomList = () => {
     setList(generateRandomList());
     setSwap([]);
     setAreas([]);
   };
+
+  const keys = [
+    {
+      backgroundColor: "grey",
+      label: "current index",
+    },
+    {
+      backgroundColor: "green",
+      label: "smallest item",
+    },
+    {
+      backgroundColor: "blue",
+      label: "finding smallest",
+    },
+  ];
+
   return (
     <div>
       {list.length && (
@@ -121,7 +117,7 @@ export default function SortingAlgorithm() {
         </div>
       )}
       <div className="flex flex-col items-center">
-        <h2 className="algorithm-title">Insertion Sort</h2>
+        <h2 className="algorithm-title">Selection Sort</h2>
         <List
           list={list}
           setList={setList}
@@ -132,7 +128,7 @@ export default function SortingAlgorithm() {
         />
         <div className="flex gap-5">
           <motion.button
-            onClick={handleInsertionSort}
+            onClick={handleSelectionSort}
             whileHover={{ scale: 1.1 }}
             className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
           >
