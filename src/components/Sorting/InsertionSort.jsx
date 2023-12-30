@@ -1,6 +1,7 @@
 import { useState } from "react";
 import List from "./List";
 import uuid from "react-uuid";
+import Controls from "../Graph/Controls";
 
 export default function InsertionSort() {
   const [test1, setTest1] = useState("");

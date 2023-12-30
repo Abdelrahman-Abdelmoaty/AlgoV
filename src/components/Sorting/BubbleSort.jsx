@@ -133,8 +133,19 @@ export default function BubbleSort() {
   return (
     <div className="flex flex-col items-center">
       <h2 className="algorithm-title">Bubble Sort</h2>
-      <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} />
-      <motion.button onClick={handleSort} whileHover={{ scale: 1.1 }} className="bg-[rgb(5,131,83)] text-white px-5 py-4 text-2xl font-semibold rounded-xl">
+      <List
+        list={list}
+        setList={setList}
+        setSwapList={setSwap}
+        swapList={swap}
+        areas={areas}
+        setAreas={setAreas}
+      />
+      <motion.button
+        onClick={handleSort}
+        whileHover={{ scale: 1.1 }}
+        className="bg-[rgb(5,131,83)] text-white px-5 py-4 text-2xl font-semibold rounded-xl"
+      >
         Sort
       </motion.button>
     </div>
