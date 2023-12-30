@@ -28,6 +28,10 @@ const router = createBrowserRouter([
           { path: "bubble-sort", element: <BubbleSort /> },
         ],
       },
+      {
+        path: "",
+        element: <Home />,
+      },
     ],
   },
 ]);
