@@ -5,7 +5,9 @@ export default function Navbar() {
   return (
     <header>
       <Link href="/">
-        <h1 className="title">AlgoV</h1>
+        <h1 className="title">
+          Algo<span className="text-[#ffd701]">V</span>
+        </h1>
       </Link>
       <nav>
         <ul>

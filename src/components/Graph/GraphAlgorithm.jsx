@@ -53,7 +53,7 @@ export default function GraphAlgorithm({
           />
           <div className="keys">
             {keys?.map((key) => (
-              <div className="key">
+              <div className="key" key={key.label}>
                 <div className="sample" style={key}></div>
                 <span>{key.label}</span>
               </div>

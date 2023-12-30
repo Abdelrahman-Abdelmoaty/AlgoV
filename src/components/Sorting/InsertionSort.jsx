@@ -1,6 +1,7 @@
 import { useState } from "react";
 import List from "./List";
 import uuid from "react-uuid";
+import Controls from "../Graph/Controls";
 import { motion } from "framer-motion";
 import "../../styles/graph-algorithm.css";
 

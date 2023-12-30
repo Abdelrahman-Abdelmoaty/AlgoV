@@ -30,6 +30,7 @@ export default function List({
   setSwapList,
   areas,
   setAreas,
+  showControls = true,
 }) {
   const [swapping, setSwapping] = useState(false);
   const [added, setAdded] = useState(false);
@@ -197,7 +198,7 @@ export default function List({
       <div className="flex flex-col justify-between items-start py-20 list-container">
         <ul className="list">{res.map((i) => i)}</ul>
       </div>
-      {!swapping ? (
+      {!swapping && showControls ? (
         <div className="w-full">
           <form
             onSubmit={handleAddItem}

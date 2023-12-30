@@ -29,6 +29,10 @@ const router = createBrowserRouter([
           { path: "selection-sort", element: <SelectionSort />},
         ],
       },
+      {
+        path: "",
+        element: <Home />,
+      },
     ],
   },
 ]);
