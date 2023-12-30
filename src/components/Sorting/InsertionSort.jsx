@@ -1,100 +1,186 @@
 import { useState } from "react";
 import List from "./List";
 import uuid from "react-uuid";
+import { motion } from "framer-motion";
+import "../../styles/graph-algorithm.css";
 
-export default function InsertionSort() {
-  const [test1, setTest1] = useState("");
-  const [test2, setTest2] = useState("");
-  const [areas, setAreas] = useState([
-    {
-      i: 1,
-      j: 2,
-      color: "red",
-    },
-    {
-      i: 3,
-      j: 9,
-      color: "blue",
-    },
-  ]);
+export default function SortingAlgorithm() {
   const [list, setList] = useState([
-    { id: uuid(), value: 1 },
-    { id: uuid(), value: 2 },
-    { id: uuid(), value: 3 },
-    { id: uuid(), value: 1 },
-    { id: uuid(), value: 2 },
-    { id: uuid(), value: 3 },
-    { id: uuid(), value: 1 },
-    { id: uuid(), value: 2 },
-    { id: uuid(), value: 3 },
-  ]);
-  const [swap, setSwap] = useState([
-    { i: 1, j: 2 },
-    { i: 3, j: 4 },
-    { i: 1, j: 3 },
+    {
+      id: uuid(),
+      value: 2,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 1,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 3,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 6,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 5,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 4,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 10,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 9,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
+    {
+      id: uuid(),
+      value: 7,
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    },
   ]);
 
+  const [swap, setSwap] = useState([]);
+  const [areas, setAreas] = useState([]);
+
+  const changeColor = (i, color) => {
+    setList((list) => {
+      return list.map((item, idx) => {
+        if (idx === i) {
+          return {
+            ...item,
+            backgroundColor: color === "black" ? "white" : color,
+          };
+        } else return item;
+      });
+    });
+  };
+
+  const resetColors = (start, end) => {
+    for (let i = start; i <= end; i++) {
+      changeColor(i, "black");
+    }
+  };
+
+  const makeFullSwap = (i, j, time, swapFlag, callback) => {
+    setTimeout(() => {
+      changeColor(i, "grey");
+      changeColor(j, "green");
+      swapFlag && setSwap((prev) => [...prev, { i, j }]);
+      setTimeout(
+        () => {
+          changeColor(i, "black");
+          changeColor(j, "black");
+          callback();
+        },
+        swapFlag ? 4500 : 500
+      );
+    }, time);
+  };
+  const handleInsertionSort = async () => {
+    const copy = [...list];
+    const n = copy.length;
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    changeColor(0, "green");
+    await delay(1000);
+    changeColor(0, "blue");
+    await delay(1000);
+    for (let i = 1; i < n; i++) {
+      let key = copy[i].value;
+      let j = i - 1;
+
+      changeColor(i, "green");
+
+      while (j >= 0 && copy[j].value > key) {
+        resetColors(0, n - 1);
+        await new Promise((resolve) =>
+          makeFullSwap(j, j + 1, 1000, true, () => {
+            resolve();
+          })
+        );
+        j = j - 1;
+      }
+      await delay(1000);
+      for (let k = i; k >= 0; k--) changeColor(k, "blue");
+      // resetColors(0, n - 1);
+
+      await delay(1000);
+    }
+  };
+
+  const keys = [
+    {
+      backgroundColor: "grey",
+      label: "swapping till its position",
+    },
+    {
+      backgroundColor: "green",
+      label: "current item to insert",
+    },
+    {
+      backgroundColor: "blue",
+      label: "sorted subarray till now",
+    },
+  ];
   return (
     <div>
-      <List
-        list={list}
-        setList={setList}
-        setSwapList={setSwap}
-        swapList={swap}
-        areas={areas}
-        setAreas={setAreas}
-      />
-      <button
-        onClick={() =>
-          setList([
-            { id: "1", value: 1 },
-            { id: "2", value: 2 },
-            { id: "3", value: 3 },
-            { id: "4", value: 1 },
-            { id: "5", value: 2 },
-            { id: "6", value: 3 },
-            { id: "7", value: 1 },
-            { id: "8", value: 2 },
-            { id: "9", value: 3 },
-            { id: "10", value: 1 },
-            { id: "20", value: 2 },
-            { id: "30", value: 3 },
-            { id: "40", value: 1 },
-            { id: "50", value: 2 },
-            { id: "60", value: 3 },
-            { id: "70", value: 1 },
-            { id: "80", value: 2 },
-            { id: "90", value: 3 },
-            { id: "12", value: 1 },
-            { id: "22", value: 2 },
-            { id: "32", value: 3 },
-            { id: "42", value: 1 },
-            { id: "52", value: 2 },
-            { id: "62", value: 3 },
-            { id: "72", value: 1 },
-            { id: "82", value: 2 },
-            { id: "92", value: 3 },
-            { id: "120", value: 1 },
-            { id: "220", value: 2 },
-            { id: "320", value: 3 },
-            { id: "420", value: 1 },
-            { id: "520", value: 2 },
-            { id: "620", value: 3 },
-            { id: "720", value: 1 },
-            { id: "820", value: 2 },
-            { id: "920", value: 3 },
-          ])
-        }
-      >
-        create
-      </button>
-      <input value={test1} onChange={(e) => setTest1(e.target.value)} />
-      <input value={test2} onChange={(e) => setTest2(e.target.value)} />
-
-      <button onClick={() => setSwap([...swap, { i: +test1, j: +test2 }])}>
-        swap
-      </button>
-      <button onClick={() => setSwap([...swap, { i: 0, j: 2 }])}>swap2</button>
+      <div className="keys absolute left-0 top-1/2 transform -translate-y-1/2 pl-20">
+        {keys?.map((key) => (
+          <div className="key">
+            <div className="sample" style={key}></div>
+            <span>{key.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-col items-center">
+        <h2 className="algorithm-title">Insertion Sort</h2>
+        <List
+          list={list}
+          setList={setList}
+          setSwapList={setSwap}
+          swapList={swap}
+          areas={areas}
+          setAreas={setAreas}
+        />
+        <motion.button
+          onClick={handleInsertionSort}
+          whileHover={{ scale: 1.1 }}
+          className="bg-[rgb(5,131,83)] text-white px-5 py-4 text-2xl font-semibold rounded-xl"
+        >
+          Insertion Sort
+        </motion.button>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import DFS from "./components/Graph/DFS";
 import Layout from "./components/Layout";
 import InsertionSort from "./components/Sorting/InsertionSort";
 import BubbleSort from "./components/Sorting/BubbleSort";
-
+import SelectionSort from "./components/Sorting/SelectionSort";
 const router = createBrowserRouter([
   {
     path: "",
@@ -26,6 +26,7 @@ const router = createBrowserRouter([
         children: [
           { path: "insertion-sort", element: <InsertionSort /> },
           { path: "bubble-sort", element: <BubbleSort /> },
+          { path: "selection-sort", element: <SelectionSort />},
         ],
       },
     ],
