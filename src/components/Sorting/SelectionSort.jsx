@@ -4,72 +4,20 @@ import uuid from "react-uuid";
 import { motion } from "framer-motion";
 import "../../styles/graph-algorithm.css";
 
+const generateRandomList = () => {
+  const randomValue = () => Math.floor(Math.random() * 10) + 1;
+
+  return Array.from({ length: 9 }, (_, index) => ({
+    id: uuid(),
+    value: randomValue(),
+    color: "black",
+    backgroundColor: "white",
+    borderColor: "black",
+  }));
+};
+
 export default function SelectionSort() {
-  const [list, setList] = useState([
-    {
-      id: uuid(),
-      value: 1,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 2,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 3,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 1,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 5,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 4,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 9,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 10,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 3,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-  ]);
+  const [list, setList] = useState([]);
   const [swap, setSwap] = useState([]);
   const [areas, setAreas] = useState([]);
 
@@ -134,6 +82,13 @@ export default function SelectionSort() {
     }
     changeColor(n - 1, "black");
   };
+
+  const handleGenerateRandomList = () => {
+    setList(generateRandomList());
+    setSwap([]);
+    setAreas([]);
+  };
+
   const keys = [
     {
       backgroundColor: "grey",
@@ -148,16 +103,19 @@ export default function SelectionSort() {
       label: "finding smallest",
     },
   ];
+
   return (
     <div>
-      <div className="keys absolute left-0 top-1/2 transform -translate-y-1/2 pl-20">
-        {keys?.map((key) => (
-          <div className="key">
-            <div className="sample" style={key}></div>
-            <span>{key.label}</span>
-          </div>
-        ))}
-      </div>
+      {list.length && (
+        <div className="keys absolute left-0 top-1/2 transform -translate-y-1/2 pl-20">
+          {keys?.map((key) => (
+            <div className="key">
+              <div className="sample" style={key}></div>
+              <span>{key.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Selection Sort</h2>
         <List
@@ -168,13 +126,22 @@ export default function SelectionSort() {
           areas={areas}
           setAreas={setAreas}
         />
-        <motion.button
-          onClick={handleSelectionSort}
-          whileHover={{ scale: 1.1 }}
-          className="bg-[rgb(5,131,83)] text-white px-5 py-4 text-2xl font-semibold rounded-xl"
-        >
-          Selection Sort
-        </motion.button>
+        <div className="flex gap-5">
+          <motion.button
+            onClick={handleSelectionSort}
+            whileHover={{ scale: 1.1 }}
+            className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
+          >
+            Sort
+          </motion.button>
+          <motion.button
+            onClick={handleGenerateRandomList}
+            whileHover={{ scale: 1.1 }}
+            className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
+          >
+            Generate
+          </motion.button>
+        </div>
       </div>
     </div>
   );

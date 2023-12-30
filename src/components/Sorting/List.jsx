@@ -194,7 +194,7 @@ export default function List({
   }
 
   return (
-    <div className="flex flex-col justify-between items-center gap-10 py-20 list-component">
+    <div className="flex flex-col justify-between items-center gap-10 py-7 list-component">
       <div className="flex flex-col justify-between items-start py-20 list-container">
         <ul className="list">{res.map((i) => i)}</ul>
       </div>
@@ -204,24 +204,18 @@ export default function List({
             onSubmit={handleAddItem}
             className="flex flex-col items-center justify-between gap-5"
           >
-            <motion.input
-              type="text"
-              onChange={(e) => {
-                setInput(e.target.value);
-                setError(false);
-              }}
-              value={input}
-              placeholder="Enter the Number"
-              className="border-b-2 border-black outline-none text-center font-semibold text-xl flex-1"
-              whileFocus={{ scale: 1.1 }}
-            />
-            {error && (
-              <p className="text-start block text-red-500  font-semibold mt-[-20px]">
-                Please enter a number!
-              </p>
-            )}
-
-            <div className="flex gap-10">
+            <div className="flex gap-5">
+              <motion.input
+                type="text"
+                onChange={(e) => {
+                  setInput(e.target.value);
+                  setError(false);
+                }}
+                value={input}
+                placeholder="Number"
+                className="border-b-2 border-black outline-none text-center font-semibold text-xl w-32"
+                whileFocus={{ scale: 1.1 }}
+              />
               <motion.button
                 onClick={handleAddItem}
                 className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
@@ -235,12 +229,17 @@ export default function List({
                   setAreas([]);
                   setSwapList([]);
                 }}
-                className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
+                className="flex-1 font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize"
                 whileHover={{ scale: 1.1 }}
               >
                 Reset
               </motion.button>
             </div>
+            {error && (
+              <p className="text-start block text-red-500 font-semibold mt-[-20px]">
+                Please enter a number!
+              </p>
+            )}
           </form>
         </div>
       ) : (

@@ -9,73 +9,22 @@ import { motion } from "framer-motion";
 // backgroundColor?: string,
 // borderColor?: string,
 export default function BubbleSort() {
-  const [list, setList] = useState([
-    {
-      id: uuid(),
-      value: 1,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 2,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 3,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 6,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 5,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 4,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 9,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 10,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-    {
-      id: uuid(),
-      value: 3,
-      color: "black",
-      backgroundColor: "white",
-      borderColor: "black",
-    },
-  ]);
+  const [list, setList] = useState([]);
   const [swap, setSwap] = useState([]);
   const [areas, setAreas] = useState([]);
+
+  const generateRandomList = () => {
+    const randomValue = () => Math.floor(Math.random() * 10) + 1;
+
+    return Array.from({ length: 9 }, (_, index) => ({
+      id: uuid(),
+      value: randomValue(),
+      color: "black",
+      backgroundColor: "white",
+      borderColor: "black",
+    }));
+  };
+
   const changeColor = (i) => {
     setList((list) => {
       return list.map((item, idx) => {
@@ -130,6 +79,13 @@ export default function BubbleSort() {
     console.log(list);
     console.log(copy);
   };
+
+  const handleGenerateRandomList = () => {
+    setList(generateRandomList());
+    setSwap([]);
+    setAreas([]);
+  };
+
   return (
     <div className="flex flex-col items-center">
       <h2 className="algorithm-title">Bubble Sort</h2>
@@ -141,13 +97,22 @@ export default function BubbleSort() {
         areas={areas}
         setAreas={setAreas}
       />
-      <motion.button
-        onClick={handleSort}
-        whileHover={{ scale: 1.1 }}
-        className="bg-[rgb(5,131,83)] text-white px-5 py-4 text-2xl font-semibold rounded-xl"
-      >
-        Sort
-      </motion.button>
+      <div className="flex gap-5">
+        <motion.button
+          onClick={handleSort}
+          whileHover={{ scale: 1.1 }}
+          className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
+        >
+          Sort
+        </motion.button>
+        <motion.button
+          onClick={handleGenerateRandomList}
+          whileHover={{ scale: 1.1 }}
+          className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
+        >
+          Generate
+        </motion.button>
+      </div>
     </div>
   );
 }
