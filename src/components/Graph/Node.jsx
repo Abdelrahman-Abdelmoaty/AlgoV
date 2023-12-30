@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
-  const [circle, setCircle] = useState({ cx: node.x, cy: node.y, radius: 35 });
-  const strokeWidth = 6;
+  const [circle, setCircle] = useState({ cx: node.x, cy: node.y, radius: 25 });
+  const strokeWidth = 4;
   const svgGroupElemRef = useRef(null);
 
   const startDrag = useCallback(
@@ -63,31 +63,14 @@ const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
         }
       }}
       onClick={() => {
-        if (
-          activeEdge.src &&
-          activeEdge.src !== node.id &&
-          activeEdge.dest === null
-        ) {
+        if (activeEdge.src && activeEdge.src !== node.id && activeEdge.dest === null) {
           setActiveEdge({ src: null, dest: null });
           setEdges((prev) => [...prev, { src: activeEdge.src, dest: node.id }]);
         }
       }}
     >
-      <circle
-        cx={circle.cx}
-        cy={circle.cy}
-        r={circle.radius}
-        style={{ fill: node.color, stroke: node.borderColor, strokeWidth }}
-        className="flex items-center justify-center"
-      />
-      <text
-        x={circle.cx}
-        y={circle.cy}
-        textAnchor="middle"
-        alignmentBaseline="middle"
-        fontSize="18"
-        fontWeight="bold"
-      >
+      <circle cx={circle.cx} cy={circle.cy} r={circle.radius} style={{ fill: node.color, stroke: node.borderColor, strokeWidth }} className="flex items-center justify-center" />
+      <text x={circle.cx} y={circle.cy + 5} textAnchor="middle" alignmentBaseline="middle" fontSize="18" fontWeight="bold">
         {node.value}
       </text>
     </motion.g>

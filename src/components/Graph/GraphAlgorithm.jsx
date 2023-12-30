@@ -3,18 +3,7 @@ import { useEffect, useState } from "react";
 import Controls from "./Controls";
 import Graph from "./Graph";
 
-export default function GraphAlgorithm({
-  start,
-  back,
-  next,
-  setAdjMat,
-  startIdx,
-  setStartIdx,
-  nodes,
-  setNodes,
-  keys,
-  end,
-}) {
+export default function GraphAlgorithm({ start, back, next, setAdjMat, startIdx, setStartIdx, nodes, setNodes, keys, end }) {
   const [edges, setEdges] = useState([]);
   const [directed, setDirected] = useState(false);
 
@@ -42,15 +31,7 @@ export default function GraphAlgorithm({
     <div className="graph-algorithm-component">
       <main className="flex justify-between items-center">
         <aside>
-          <Controls
-            start={start}
-            startV={nodes[startIdx]?.value}
-            setStart={(val) =>
-              setStartIdx(nodes.findIndex((n) => n.value === val))
-            }
-            next={next}
-            back={back}
-          />
+          <Controls start={start} startV={nodes[startIdx]?.value} setStart={(val) => setStartIdx(nodes.findIndex((n) => n.value === val))} next={next} back={back} />
           <div className="keys">
             {keys?.map((key) => (
               <div className="key">
@@ -60,12 +41,7 @@ export default function GraphAlgorithm({
             ))}
           </div>
         </aside>
-        <Graph
-          nodes={nodes}
-          setNodes={setNodes}
-          edges={edges}
-          setEdges={setEdges}
-        />
+        <Graph nodes={nodes} setNodes={setNodes} edges={edges} setEdges={setEdges} directed={directed} setDirected={setDirected} />
       </main>
     </div>
   );

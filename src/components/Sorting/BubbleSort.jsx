@@ -116,16 +116,19 @@ export default function BubbleSort() {
     console.log(list);
     console.log(copy);
     for (let i = 0; i < list.length; i++) {
+      let swapped = false;
       for (let j = 0; j < list.length - i - 1; j++) {
         if (copy[j] > copy[j + 1]) {
           makeFullSwap(j, j + 1, time, true);
           [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
           time += 5000;
+          swapped = true;
         } else {
           makeFullSwap(j, j + 1, time, false);
           time += 1000;
         }
       }
+      if (swapped === false) break;
     }
     console.log(list);
     console.log(copy);
