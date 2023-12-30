@@ -16,7 +16,7 @@ export default function Controls({ start, startV, setStart, next, back, end }) {
           next();
           setFinished(!finished);
         }
-      }, 1000 * (11 - speed));
+      }, 500 * (11 - speed));
   }, [finished, auto]);
 
   return (
