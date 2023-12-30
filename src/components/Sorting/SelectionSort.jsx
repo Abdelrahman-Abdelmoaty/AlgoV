@@ -20,8 +20,7 @@ export default function SelectionSort() {
   const [list, setList] = useState([]);
   const [swap, setSwap] = useState([]);
   const [areas, setAreas] = useState([]);
-  const [showControls, setShowControls] = useState(true);
-
+  const [controls, setControls] = useState(true);
   const changeColor = (i, color) => {
     setList((list) => {
       return list.map((item, idx) => {
@@ -37,7 +36,7 @@ export default function SelectionSort() {
 
   const makeFullSwap = (i, j, time, swapFlag, callback) => {
     setTimeout(() => {
-      changeColor(i, "grey");
+      changeColor(i, "rgb(200,250,150)");
       changeColor(j, "green");
       swapFlag && setSwap((prev) => [...prev, { i, j }]);
       setTimeout(
@@ -52,7 +51,7 @@ export default function SelectionSort() {
   };
 
   const handleSelectionSort = async () => {
-    setShowControls(false);
+    setControls(false);
     const copy = [...list];
     const n = copy.length;
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -65,7 +64,7 @@ export default function SelectionSort() {
         changeColor(j, "blue");
         await delay(1000);
         if (copy[j].value < copy[minIndex].value) {
-          if (minIndex == i) changeColor(minIndex, "grey");
+          if (minIndex == i) changeColor(minIndex, "rgb(200,250,150)");
           else changeColor(minIndex, "black");
           minIndex = j;
           changeColor(minIndex, "green");
@@ -83,8 +82,11 @@ export default function SelectionSort() {
       } else changeColor(i, "black");
     }
     changeColor(n - 1, "black");
+    setControls(true);
   };
-
+  const handleStop = () => {
+    window.location.href = "http://localhost:3000/sorting/selection-sort";
+  };
   const handleGenerateRandomList = () => {
     setList(generateRandomList());
     setSwap([]);
@@ -93,7 +95,7 @@ export default function SelectionSort() {
 
   const keys = [
     {
-      backgroundColor: "grey",
+      backgroundColor: "rgb(200,250,150)",
       label: "current index",
     },
     {
@@ -120,16 +122,41 @@ export default function SelectionSort() {
       )}
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Selection Sort</h2>
-        <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} />
-        {showControls && (
+        <List
+          list={list}
+          setList={setList}
+          setSwapList={setSwap}
+          swapList={swap}
+          areas={areas}
+          setAreas={setAreas}
+          showControls={controls}
+        />
+        {controls && (
           <div className="flex gap-5">
-            <motion.button onClick={handleSelectionSort} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32">
+            <motion.button
+              onClick={handleSelectionSort}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
+            >
               Sort
             </motion.button>
-            <motion.button onClick={handleGenerateRandomList} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40">
+            <motion.button
+              onClick={handleGenerateRandomList}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
+            >
               Generate
             </motion.button>
           </div>
+        )}
+        {!controls && (
+          <motion.button
+            onClick={handleStop}
+            whileHover={{ scale: 1.1 }}
+            className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32"
+          >
+            stop
+          </motion.button>
         )}
       </div>
     </div>

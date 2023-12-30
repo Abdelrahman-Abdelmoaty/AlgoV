@@ -11,7 +11,7 @@ export default function SortingAlgorithm() {
 
   const [swap, setSwap] = useState([]);
   const [areas, setAreas] = useState([]);
-
+  const [controls, setControls] = useState(true);
   const generateRandomList = () => {
     const randomValue = () => Math.floor(Math.random() * 10) + 1;
 
@@ -45,8 +45,8 @@ export default function SortingAlgorithm() {
 
   const makeFullSwap = (i, j, time, swapFlag, callback) => {
     setTimeout(() => {
-      changeColor(i, "grey");
-      changeColor(j, "green");
+      changeColor(i, "cyan");
+      changeColor(j, "blue");
       swapFlag && setSwap((prev) => [...prev, { i, j }]);
       setTimeout(
         () => {
@@ -58,49 +58,60 @@ export default function SortingAlgorithm() {
       );
     }, time);
   };
+  function swap2(array, index1, index2) {
+    const temp = array[index1];
+    array[index1] = array[index2];
+    array[index2] = temp;
+  }
   const handleInsertionSort = async () => {
-    setShowControls(false);
+    setControls(false);
     const copy = [...list];
     const n = copy.length;
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    changeColor(0, "green");
-    await delay(1000);
     changeColor(0, "blue");
     await delay(1000);
+    changeColor(0, "rgb(5,131,83)");
+    await delay(2000);
     for (let i = 1; i < n; i++) {
       let key = copy[i].value;
       let j = i - 1;
 
-      changeColor(i, "green");
-
+      changeColor(i, "blue");
+      console.log(copy[j].value, key);
       while (j >= 0 && copy[j].value > key) {
+        console.log("in");
         resetColors(0, n - 1);
         await new Promise((resolve) =>
           makeFullSwap(j, j + 1, 1000, true, () => {
             resolve();
           })
         );
+        swap2(copy, j, j + 1);
         j = j - 1;
+        console.log("out");
       }
       await delay(1000);
-      for (let k = i; k >= 0; k--) changeColor(k, "blue");
+      for (let k = i; k >= 0; k--) changeColor(k, "rgb(5,131,83)");
       // resetColors(0, n - 1);
 
-      await delay(1000);
+      await delay(2000);
     }
+    setControls(true);
   };
-
+  const handleStop = () => {
+    window.location.href = "http://localhost:3000/sorting/insertion-sort";
+  };
   const keys = [
     {
-      backgroundColor: "grey",
+      backgroundColor: "cyan",
       label: "swapping till its position",
     },
     {
-      backgroundColor: "green",
+      backgroundColor: "blue",
       label: "current item to insert",
     },
     {
-      backgroundColor: "blue",
+      backgroundColor: "rgb(5,131,83)",
       label: "sorted subarray till now",
     },
   ];
@@ -124,16 +135,41 @@ export default function SortingAlgorithm() {
       )}
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Insertion Sort</h2>
-        <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} showControls={showControls} />
-        {showControls && (
+        <List
+          list={list}
+          setList={setList}
+          setSwapList={setSwap}
+          swapList={swap}
+          areas={areas}
+          setAreas={setAreas}
+          showControls={controls}
+        />
+        {controls && (
           <div className="flex gap-5">
-            <motion.button onClick={handleInsertionSort} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32">
+            <motion.button
+              onClick={handleInsertionSort}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
+            >
               Sort
             </motion.button>
-            <motion.button onClick={handleGenerateRandomList} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40">
+            <motion.button
+              onClick={handleGenerateRandomList}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
+            >
               Generate
             </motion.button>
           </div>
+        )}
+        {!controls && (
+          <motion.button
+            onClick={handleStop}
+            whileHover={{ scale: 1.1 }}
+            className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32"
+          >
+            stop
+          </motion.button>
         )}
       </div>
     </div>
