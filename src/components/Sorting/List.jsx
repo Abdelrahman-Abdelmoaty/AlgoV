@@ -23,15 +23,7 @@ import { motion } from "framer-motion";
         j: number
     }
 */
-export default function List({
-  list,
-  setList,
-  swapList,
-  setSwapList,
-  areas,
-  setAreas,
-  showControls = true,
-}) {
+export default function List({ list, setList, swapList, setSwapList, areas, setAreas, showControls = true }) {
   const [swapping, setSwapping] = useState(false);
   const [added, setAdded] = useState(false);
   const [lastI, setLastI] = useState(0);
@@ -158,8 +150,6 @@ export default function List({
     }
   };
 
-  console.log(list);
-
   let itemI = 0;
   let areaI = 0;
   let res = [];
@@ -200,10 +190,7 @@ export default function List({
       </div>
       {!swapping && showControls ? (
         <div className="w-full">
-          <form
-            onSubmit={handleAddItem}
-            className="flex flex-col items-center justify-between gap-5"
-          >
+          <form onSubmit={handleAddItem} className="flex flex-col items-center justify-between gap-5">
             <div className="flex gap-5">
               <motion.input
                 type="text"
@@ -216,11 +203,7 @@ export default function List({
                 className="border-b-2 border-black outline-none text-center font-semibold text-xl w-32"
                 whileFocus={{ scale: 1.1 }}
               />
-              <motion.button
-                onClick={handleAddItem}
-                className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize"
-                whileHover={{ scale: 1.1 }}
-              >
+              <motion.button onClick={handleAddItem} className="flex-1 font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize" whileHover={{ scale: 1.1 }}>
                 add
               </motion.button>
               <motion.button
@@ -228,6 +211,7 @@ export default function List({
                   setList([]);
                   setAreas([]);
                   setSwapList([]);
+                  setError(false);
                 }}
                 className="flex-1 font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize"
                 whileHover={{ scale: 1.1 }}
@@ -235,11 +219,7 @@ export default function List({
                 Reset
               </motion.button>
             </div>
-            {error && (
-              <p className="text-start block text-red-500 font-semibold mt-[-20px]">
-                Please enter a number!
-              </p>
-            )}
+            {error && <p className="text-start block text-red-500 font-semibold mt-[-20px]">Please enter a number!</p>}
           </form>
         </div>
       ) : (
