@@ -7,6 +7,7 @@ import "../../styles/graph-algorithm.css";
 
 export default function SortingAlgorithm() {
   const [list, setList] = useState([]);
+  const [showControls, setShowControls] = useState(true);
 
   const [swap, setSwap] = useState([]);
   const [areas, setAreas] = useState([]);
@@ -58,6 +59,7 @@ export default function SortingAlgorithm() {
     }, time);
   };
   const handleInsertionSort = async () => {
+    setShowControls(false);
     const copy = [...list];
     const n = copy.length;
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -122,30 +124,17 @@ export default function SortingAlgorithm() {
       )}
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Insertion Sort</h2>
-        <List
-          list={list}
-          setList={setList}
-          setSwapList={setSwap}
-          swapList={swap}
-          areas={areas}
-          setAreas={setAreas}
-        />
-        <div className="flex gap-5">
-          <motion.button
-            onClick={handleInsertionSort}
-            whileHover={{ scale: 1.1 }}
-            className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
-          >
-            Sort
-          </motion.button>
-          <motion.button
-            onClick={handleGenerateRandomList}
-            whileHover={{ scale: 1.1 }}
-            className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
-          >
-            Generate
-          </motion.button>
-        </div>
+        <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} showControls={showControls} />
+        {showControls && (
+          <div className="flex gap-5">
+            <motion.button onClick={handleInsertionSort} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32">
+              Sort
+            </motion.button>
+            <motion.button onClick={handleGenerateRandomList} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40">
+              Generate
+            </motion.button>
+          </div>
+        )}
       </div>
     </div>
   );
