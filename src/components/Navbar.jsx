@@ -6,8 +6,8 @@ export default function Navbar() {
     <header>
       <Link href="/">
         <h1 className="title">
-          AlgoV
-          {/* <span className="text-[#ffd701]">V</span> */}
+          Algo
+           <span className="text-[#ffd701]">V</span>
         </h1>
       </Link>
       <nav>
