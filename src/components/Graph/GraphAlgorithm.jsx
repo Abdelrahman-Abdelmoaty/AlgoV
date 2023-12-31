@@ -3,7 +3,18 @@ import { useEffect, useState } from "react";
 import Controls from "./Controls";
 import Graph from "./Graph";
 
-export default function GraphAlgorithm({ start, back, next, setAdjMat, startIdx, setStartIdx, nodes, setNodes, keys, end }) {
+export default function GraphAlgorithm({
+  start,
+  back,
+  next,
+  setAdjMat,
+  startIdx,
+  setStartIdx,
+  nodes,
+  setNodes,
+  keys,
+  end,
+}) {
   const [edges, setEdges] = useState([]);
   const [directed, setDirected] = useState(false);
 
@@ -25,14 +36,25 @@ export default function GraphAlgorithm({ start, back, next, setAdjMat, startIdx,
     });
 
     setAdjMat(newAdjMat);
-  }, [edges, nodes]);
+  }, [edges, nodes, directed]);
 
   return (
     <div className="graph-algorithm-component">
       <main className="flex justify-between items-center">
         <aside className="relative">
-          <Controls start={start} startV={nodes[startIdx]?.value} setStart={(val) => setStartIdx(nodes.findIndex((n) => n.value === val))} next={next} back={back} />
-          <p className="absolute font-medium pr-2">To start an edge double click on a source node and click on the destination node!</p>
+          <Controls
+            start={start}
+            startV={nodes[startIdx]?.value}
+            setStart={(val) =>
+              setStartIdx(nodes.findIndex((n) => n.value === val))
+            }
+            next={next}
+            back={back}
+          />
+          <p className="absolute font-medium pr-2">
+            To start an edge double click on a source node and click on the
+            destination node!
+          </p>
           <div className="keys">
             {keys?.map((key) => (
               <div className="key" key={key.label}>
@@ -42,7 +64,14 @@ export default function GraphAlgorithm({ start, back, next, setAdjMat, startIdx,
             ))}
           </div>
         </aside>
-        <Graph nodes={nodes} setNodes={setNodes} edges={edges} setEdges={setEdges} directed={directed} setDirected={setDirected} />
+        <Graph
+          nodes={nodes}
+          setNodes={setNodes}
+          edges={edges}
+          setEdges={setEdges}
+          directed={directed}
+          setDirected={setDirected}
+        />
       </main>
     </div>
   );

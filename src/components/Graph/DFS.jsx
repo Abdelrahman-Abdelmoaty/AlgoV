@@ -38,7 +38,6 @@ export default function DFS() {
   };
 
   const dfs = () => {
-    console.log(stack.length);
     const newNodes = [...nodes];
     if (lastVertex !== null) {
       newNodes[lastVertex].borderColor = defaultBorderColor;
