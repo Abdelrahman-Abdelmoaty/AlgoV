@@ -10,7 +10,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
   const [activeEdge, setActiveEdge] = useState({ src: null, dest: null });
   const [weighted, setWeighted] = useState(false);
   const [error, setError] = useState(false);
-  const windowWidth = useRef(window.innerWidth);
+  const windowSize = useRef([window.innerWidth, window.innerHeight]);
 
   const handleAddNode = (e) => {
     e.preventDefault();
@@ -25,8 +25,8 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
           value: input,
           color: "white",
           borderColor: "black",
-          x: ((id * 20) % (windowWidth.current * 0.5 - 50)) + 50,
-          y: ((id * 100) % 600) + 50,
+          x: ((id * 20) % (windowSize.current[0] * 0.5 - 50)) + 50,
+          y: ((id * 100) % (windowSize.current[1] * 0.7 - 50)) + 50,
         },
       ]);
       setInput("");
@@ -43,8 +43,8 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
     setEdges([]);
 
     for (let i = 1; i <= 10; i++) {
-      let newX = ((i * 100) % (windowWidth.current * 0.5 - 50)) + 50;
-      let newY = ((i * 150) % 550) + 50;
+      let newX = ((i * 100) % (windowSize.current[0] * 0.5 - 50)) + 50;
+      let newY = ((i * 150) % (windowSize.current[1] * 0.7 - 50)) + 50;
       setNodes((prevNodes) => [
         ...prevNodes,
         {
