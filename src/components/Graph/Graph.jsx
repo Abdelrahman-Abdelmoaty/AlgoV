@@ -142,6 +142,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
         <motion.button onClick={handleClearGraph} whileHover={{ scale: 1.1 }} className="w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md bg-red-500 text-white">
           Clear Graph
         </motion.button>
+        <p className="font-semibold text-start">To start an edge double click on a source node and click on the destination node!</p>
       </div>
     </div>
   );

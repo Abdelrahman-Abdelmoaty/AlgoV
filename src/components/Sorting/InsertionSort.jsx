@@ -135,40 +135,20 @@ export default function SortingAlgorithm() {
       )}
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Insertion Sort</h2>
-        <List
-          list={list}
-          setList={setList}
-          setSwapList={setSwap}
-          swapList={swap}
-          areas={areas}
-          setAreas={setAreas}
-          showControls={controls}
-        />
+        <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} showControls={controls} />
         {controls && (
           <div className="flex gap-5">
-            <motion.button
-              onClick={handleInsertionSort}
-              whileHover={{ scale: 1.1 }}
-              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
-            >
+            <motion.button onClick={handleInsertionSort} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32">
               Sort
             </motion.button>
-            <motion.button
-              onClick={handleGenerateRandomList}
-              whileHover={{ scale: 1.1 }}
-              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
-            >
+            <motion.button onClick={handleGenerateRandomList} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40">
               Generate
             </motion.button>
           </div>
         )}
         {!controls && (
-          <motion.button
-            onClick={handleStop}
-            whileHover={{ scale: 1.1 }}
-            className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32"
-          >
-            stop
+          <motion.button onClick={handleStop} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32">
+            Reset
           </motion.button>
         )}
       </div>

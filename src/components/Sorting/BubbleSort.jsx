@@ -87,6 +87,9 @@ export default function BubbleSort() {
     setSwap([]);
     setAreas([]);
   };
+  const handleStop = () => {
+    window.location.reload();
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -102,6 +105,11 @@ export default function BubbleSort() {
               Generate
             </motion.button>
           </>
+        )}
+        {!showControls && (
+          <motion.button onClick={handleStop} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32">
+            Reset
+          </motion.button>
         )}
       </div>
     </div>
