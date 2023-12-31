@@ -13,7 +13,6 @@ export default function BubbleSort() {
   const [swap, setSwap] = useState([]);
   const [areas, setAreas] = useState([]);
   const [showControls, setShowControls] = useState(true);
-  const timeoutIds = [];
   const generateRandomList = () => {
     const randomValue = () => Math.floor(Math.random() * 10) + 1;
 
@@ -46,26 +45,20 @@ export default function BubbleSort() {
     });
   };
   const makeFullSwap = (i, j, time, swapFlag) => {
-    const timeoutId1 = setTimeout(() => {
-      timeoutIds.push(timeoutId1);
+    setTimeout(() => {
       changeColor(i);
       changeColor(j);
       swapFlag && setSwap((prev) => [...prev, { i, j }]);
-      const timeoutId2 = setTimeout(
+      setTimeout(
         () => {
-          timeoutIds.push(timeoutId2);
           removeColor(i);
           removeColor(j);
         },
         swapFlag ? 4500 : 1000
       );
-      return () => {
-        if (j === list.length - 1) setShowControls(true);
-      };
     }, time);
   };
   const handleSort = () => {
-    timeoutIds.forEach((t) => clearTimeout(t));
     let time = 0;
     setShowControls(false);
     const copy = list.map((e) => e.value);
@@ -84,6 +77,9 @@ export default function BubbleSort() {
       }
       if (swapped === false) break;
     }
+    setTimeout(() => {
+      setShowControls(true);
+    }, time);
   };
 
   const handleGenerateRandomList = () => {

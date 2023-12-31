@@ -26,7 +26,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
           color: "white",
           borderColor: "black",
           x: ((id * 20) % (windowWidth.current * 0.5 - 50)) + 50,
-          y: ((id * 100) % 550) + 50,
+          y: ((id * 100) % 600) + 50,
         },
       ]);
       setInput("");

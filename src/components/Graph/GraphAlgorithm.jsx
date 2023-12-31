@@ -30,8 +30,9 @@ export default function GraphAlgorithm({ start, back, next, setAdjMat, startIdx,
   return (
     <div className="graph-algorithm-component">
       <main className="flex justify-between items-center">
-        <aside>
+        <aside className="relative">
           <Controls start={start} startV={nodes[startIdx]?.value} setStart={(val) => setStartIdx(nodes.findIndex((n) => n.value === val))} next={next} back={back} />
+          <p className="absolute font-medium pr-2">To start an edge double click on a source node and click on the destination node!</p>
           <div className="keys">
             {keys?.map((key) => (
               <div className="key" key={key.label}>
