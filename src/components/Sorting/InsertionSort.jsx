@@ -45,8 +45,8 @@ export default function SortingAlgorithm() {
 
   const makeFullSwap = (i, j, time, swapFlag, callback) => {
     setTimeout(() => {
-      changeColor(i, "cyan");
-      changeColor(j, "blue");
+      changeColor(i, "rgb(252 165 165)");
+      changeColor(j, "rgb(239 68 68)");
       swapFlag && setSwap((prev) => [...prev, { i, j }]);
       setTimeout(
         () => {
@@ -68,7 +68,7 @@ export default function SortingAlgorithm() {
     const copy = [...list];
     const n = copy.length;
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    changeColor(0, "blue");
+    changeColor(0, "rgb(239 68 68)");
     await delay(1000);
     changeColor(0, "rgb(5,131,83)");
     await delay(2000);
@@ -76,7 +76,7 @@ export default function SortingAlgorithm() {
       let key = copy[i].value;
       let j = i - 1;
 
-      changeColor(i, "blue");
+      changeColor(i, "rgb(239 68 68)");
       console.log(copy[j].value, key);
       while (j >= 0 && copy[j].value > key) {
         console.log("in");
@@ -99,15 +99,15 @@ export default function SortingAlgorithm() {
     setControls(true);
   };
   const handleStop = () => {
-    window.location.href = "http://localhost:3000/sorting/insertion-sort";
+    window.location.reload();
   };
   const keys = [
     {
-      backgroundColor: "cyan",
+      backgroundColor: "rgb(252 165 165)",
       label: "swapping till its position",
     },
     {
-      backgroundColor: "blue",
+      backgroundColor: "rgb(239 68 68)",
       label: "current item to insert",
     },
     {
@@ -123,7 +123,7 @@ export default function SortingAlgorithm() {
   };
   return (
     <div>
-      {list.length && (
+      {list.length > 0 && (
         <div className="keys absolute left-0 top-1/2 transform -translate-y-1/2 pl-20">
           {keys?.map((key) => (
             <div className="key">

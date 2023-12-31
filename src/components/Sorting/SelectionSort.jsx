@@ -37,7 +37,7 @@ export default function SelectionSort() {
   const makeFullSwap = (i, j, time, swapFlag, callback) => {
     setTimeout(() => {
       changeColor(i, "rgb(200,250,150)");
-      changeColor(j, "green");
+      changeColor(j, "rgb(5,131,83)");
       swapFlag && setSwap((prev) => [...prev, { i, j }]);
       setTimeout(
         () => {
@@ -57,17 +57,17 @@ export default function SelectionSort() {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     for (let i = 0; i < n - 1; i++) {
       let minIndex = i;
-      changeColor(i, "blue");
+      changeColor(i, "rgb(239 68 68)");
       await delay(1000);
-      changeColor(i, "green");
+      changeColor(i, "rgb(5,131,83)");
       for (let j = i + 1; j < n; j++) {
-        changeColor(j, "blue");
+        changeColor(j, "rgb(239 68 68)");
         await delay(1000);
         if (copy[j].value < copy[minIndex].value) {
           if (minIndex == i) changeColor(minIndex, "rgb(200,250,150)");
           else changeColor(minIndex, "black");
           minIndex = j;
-          changeColor(minIndex, "green");
+          changeColor(minIndex, "rgb(5,131,83)");
         } else {
           changeColor(j, "black");
         }
@@ -85,7 +85,7 @@ export default function SelectionSort() {
     setControls(true);
   };
   const handleStop = () => {
-    window.location.href = "http://localhost:3000/sorting/selection-sort";
+    window.location.reload();
   };
   const handleGenerateRandomList = () => {
     setList(generateRandomList());
@@ -99,18 +99,18 @@ export default function SelectionSort() {
       label: "current index",
     },
     {
-      backgroundColor: "green",
+      backgroundColor: "rgb(5,131,83)",
       label: "smallest item",
     },
     {
-      backgroundColor: "blue",
+      backgroundColor: "rgb(239 68 68)",
       label: "finding smallest",
     },
   ];
 
   return (
     <div>
-      {list.length && (
+      {list.length > 0 && (
         <div className="keys absolute left-0 top-1/2 transform -translate-y-1/2 pl-20">
           {keys?.map((key) => (
             <div className="key">
