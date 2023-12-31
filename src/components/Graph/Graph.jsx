@@ -1,4 +1,6 @@
 import Node from "./Node";
+import { useRef } from "react";
+
 import Edge from "./Edge";
 import GraphArea from "./GraphArea";
 import { useState } from "react";
@@ -8,6 +10,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
   const [activeEdge, setActiveEdge] = useState({ src: null, dest: null });
   const [weighted, setWeighted] = useState(false);
   const [error, setError] = useState(false);
+  const windowWidth = useRef(window.innerWidth);
 
   const handleAddNode = (e) => {
     e.preventDefault();
@@ -15,31 +18,17 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
       setError(true);
     } else {
       const id = nodes.length + 1;
-      if (id < 12) {
-        setNodes([
-          ...nodes,
-          {
-            id: id,
-            value: input,
-            color: "white",
-            borderColor: "black",
-            x: (id * 100) % 1200,
-            y: (id * 250) % 600,
-          },
-        ]);
-      } else {
-        setNodes([
-          ...nodes,
-          {
-            id: id,
-            value: input,
-            color: "white",
-            borderColor: "black",
-            x: ((id * 100) % 1200) + 200,
-            y: ((id * 250) % 600) + 200,
-          },
-        ]);
-      }
+      setNodes([
+        ...nodes,
+        {
+          id: id,
+          value: input,
+          color: "white",
+          borderColor: "black",
+          x: ((id * 20) % (windowWidth.current * 0.5 - 50)) + 50,
+          y: ((id * 100) % 550) + 50,
+        },
+      ]);
       setInput("");
     }
   };
@@ -54,9 +43,8 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
     setEdges([]);
 
     for (let i = 1; i <= 10; i++) {
-      let newX = (100 * i) % 1200;
-      let newY = (250 * i) % 600;
-
+      let newX = ((i * 100) % (windowWidth.current * 0.5 - 50)) + 50;
+      let newY = ((i * 150) % 550) + 50;
       setNodes((prevNodes) => [
         ...prevNodes,
         {
@@ -72,8 +60,8 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
 
     for (let i = 1; i <= 10; i++) {
       const srcNodeId = i;
-      const destNodeId = Math.floor(Math.random() * 10) + 1;
-
+      let destNodeId = i;
+      while (destNodeId === i) destNodeId = Math.floor(Math.random() * 10) + 1;
       if (srcNodeId !== destNodeId) {
         setEdges((prevEdges) => [
           ...prevEdges,
