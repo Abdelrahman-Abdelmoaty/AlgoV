@@ -1,9 +1,9 @@
-/* .list-component {
-  min-height: 550px;
-  max-height: 550px;
-} */
+.list-component {
+  max-width: calc(100% - 210px);
+}
 .list-component .list-container {
   overflow-x: scroll;
+  max-width: 100%;
 }
 .list-component .list,
 .list-component .list > div {
