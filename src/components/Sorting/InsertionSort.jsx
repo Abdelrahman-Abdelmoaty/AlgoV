@@ -77,18 +77,15 @@ export default function SortingAlgorithm() {
       let j = i - 1;
 
       changeColor(i, "rgb(239 68 68)");
-      console.log(copy[j].value, key);
       while (j >= 0 && copy[j].value > key) {
-        console.log("in");
         resetColors(0, n - 1);
         await new Promise((resolve) =>
-          makeFullSwap(j, j + 1, 1000, true, () => {
+          makeFullSwap(j, j + 1, 0, true, () => {
             resolve();
           })
         );
         swap2(copy, j, j + 1);
         j = j - 1;
-        console.log("out");
       }
       await delay(1000);
       for (let k = i; k >= 0; k--) changeColor(k, "rgb(5,131,83)");
