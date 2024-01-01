@@ -4,7 +4,7 @@
   max-width: 100vw;
 }
 .graph-algorithm-component .controls {
-  padding: 15px 15px 15px 0;
+  padding: 0px 15px 15px 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
