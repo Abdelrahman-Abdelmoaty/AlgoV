@@ -58,11 +58,11 @@ export default function SelectionSort() {
     for (let i = 0; i < n - 1; i++) {
       let minIndex = i;
       changeColor(i, "rgb(239 68 68)");
-      await delay(1000);
+      await delay(800);
       changeColor(i, "rgb(5,131,83)");
       for (let j = i + 1; j < n; j++) {
         changeColor(j, "rgb(239 68 68)");
-        await delay(1000);
+        await delay(800);
         if (copy[j].value < copy[minIndex].value) {
           if (minIndex == i) changeColor(minIndex, "rgb(200,250,150)");
           else changeColor(minIndex, "black");
@@ -74,7 +74,7 @@ export default function SelectionSort() {
       }
       if (minIndex !== i) {
         await new Promise((resolve) =>
-          makeFullSwap(i, minIndex, 1000, true, () => {
+          makeFullSwap(i, minIndex, 0, true, () => {
             [copy[i], copy[minIndex]] = [copy[minIndex], copy[i]];
             resolve();
           })
