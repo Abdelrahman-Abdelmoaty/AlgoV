@@ -123,31 +123,55 @@ export default function SortingAlgorithm() {
   };
   return (
     <div>
-      {list.length > 0 && (
-        <div className="keys absolute left-0 top-1/2 transform -translate-y-1/2 pl-20">
-          {keys?.map((key) => (
-            <div className="key">
-              <div className="sample" style={key}></div>
-              <span>{key.label}</span>
-            </div>
-          ))}
-        </div>
-      )}
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Insertion Sort</h2>
-        <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} showControls={controls} />
+        <div className="flex w-full gap-10">
+          {list.length > 0 && (
+            <div className="keys pl-10">
+              {keys?.map((key) => (
+                <div className="key">
+                  <div className="sample" style={key}></div>
+                  <span>{key.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="flex-grow">
+            <List
+              list={list}
+              setList={setList}
+              setSwapList={setSwap}
+              swapList={swap}
+              areas={areas}
+              setAreas={setAreas}
+              showControls={controls}
+            />
+          </div>
+        </div>
         {controls && (
           <div className="flex gap-5">
-            <motion.button onClick={handleInsertionSort} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32">
+            <motion.button
+              onClick={handleInsertionSort}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
+            >
               Sort
             </motion.button>
-            <motion.button onClick={handleGenerateRandomList} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40">
+            <motion.button
+              onClick={handleGenerateRandomList}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
+            >
               Generate
             </motion.button>
           </div>
         )}
         {!controls && (
-          <motion.button onClick={handleStop} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32">
+          <motion.button
+            onClick={handleStop}
+            whileHover={{ scale: 1.1 }}
+            className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32"
+          >
             Reset
           </motion.button>
         )}
