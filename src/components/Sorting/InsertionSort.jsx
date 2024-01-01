@@ -124,7 +124,7 @@ export default function SortingAlgorithm() {
         <h2 className="algorithm-title">Insertion Sort</h2>
         <div className="flex w-full gap-10">
           {list.length > 0 && (
-            <div className="keys pl-10">
+            <div className="keys pl-10" style={{ minWidth: "260px" }}>
               {keys?.map((key) => (
                 <div className="key">
                   <div className="sample" style={key}></div>
@@ -133,7 +133,7 @@ export default function SortingAlgorithm() {
               ))}
             </div>
           )}
-          <div className="flex-grow">
+          <div className="flex-grow" style={{ maxWidth: "calc(100% - 210px)" }}>
             <List
               list={list}
               setList={setList}
@@ -146,7 +146,7 @@ export default function SortingAlgorithm() {
           </div>
         </div>
         {controls && (
-          <div className="flex gap-5">
+          <div className="flex gap-5 mt-[40px]">
             <motion.button
               onClick={handleInsertionSort}
               whileHover={{ scale: 1.1 }}
