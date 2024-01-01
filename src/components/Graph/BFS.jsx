@@ -84,7 +84,6 @@ export default function BFS() {
       color += letters[Math.floor(Math.random() * 16)];
     return color;
   };
-
   const keys = [
     {
       borderColor: currentBorderColor,
@@ -94,10 +93,12 @@ export default function BFS() {
       borderColor: neighborBorderColor,
       label: "Neighbors",
     },
-    ...Object.keys(levelColors).map((level, index) => ({
-      backgroundColor: levelColors[level],
-      label: `Level ${index}`,
-    })),
+    ...Object.keys(levelColors)
+      .filter((level) => nodes.some((node) => node.color === levelColors[level]))
+      .map((level, index) => ({
+        backgroundColor: levelColors[level],
+        label: `Level ${index}`,
+      })),
   ];
   return (
     <div className="dfs-component">
