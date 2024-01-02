@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Wrapper from "./Wrapper";
 export default function Layout() {
   return (
-    <div className="page">
+    <div className="layout-component">
       <Navbar />
       <Wrapper>
         <Outlet />
