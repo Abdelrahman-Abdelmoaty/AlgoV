@@ -107,7 +107,7 @@ export default function BubbleSort() {
         setAreas={setAreas}
         showControls={showControls}
       />
-      <div className="flex gap-5 mt-[40px]">
+      <div className="flex gap-5 mt-[55px]">
         {showControls && (
           <>
             <motion.button

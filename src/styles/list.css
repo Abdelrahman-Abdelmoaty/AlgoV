@@ -28,3 +28,19 @@
   display: block;
   visibility: hidden;
 }
+
+@media screen and (max-width: 768px){
+  .list-component{
+    max-width: 100%;
+  }
+  .keys-and-list{
+    flex-direction: column;
+    gap: 0;
+  }
+  .keys-and-list .keys{
+    height: unset;
+  }
+  .keys-and-list .list-container{
+    max-width: 100% !important;
+  }
+}

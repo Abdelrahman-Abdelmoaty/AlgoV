@@ -112,7 +112,7 @@ export default function SelectionSort() {
     <div>
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Selection Sort</h2>
-        <div className="flex w-full gap-10">
+        <div className="keys-and-list flex w-full gap-10">
           {list.length > 0 && (
             <div className="keys pl-10" style={{ minWidth: "260px" }}>
               {keys?.map((key) => (
@@ -123,7 +123,10 @@ export default function SelectionSort() {
               ))}
             </div>
           )}
-          <div className="flex-grow" style={{ maxWidth: "calc(100% - 210px)" }}>
+          <div
+            className="list-container flex-grow"
+            style={{ maxWidth: "calc(100% - 210px)" }}
+          >
             <List
               list={list}
               setList={setList}
@@ -136,7 +139,7 @@ export default function SelectionSort() {
           </div>
         </div>
         {controls && (
-          <div className="flex gap-5 mt-[40px]">
+          <div className="flex gap-5 mt-[55px]">
             <motion.button
               onClick={handleSelectionSort}
               whileHover={{ scale: 1.1 }}
