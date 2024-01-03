@@ -1,9 +1,9 @@
-/* .list-component {
-  min-height: 550px;
-  max-height: 550px;
-} */
+.list-component {
+  max-width: calc(100% - 210px);
+}
 .list-component .list-container {
   overflow-x: scroll;
+  max-width: 100%;
 }
 .list-component .list,
 .list-component .list > div {
@@ -27,4 +27,20 @@
 .list-component .error-text.hidden {
   display: block;
   visibility: hidden;
+}
+
+@media screen and (max-width: 768px){
+  .list-component{
+    max-width: 100%;
+  }
+  .keys-and-list{
+    flex-direction: column;
+    gap: 0;
+  }
+  .keys-and-list .keys{
+    height: unset;
+  }
+  .keys-and-list .list-container{
+    max-width: 100% !important;
+  }
 }

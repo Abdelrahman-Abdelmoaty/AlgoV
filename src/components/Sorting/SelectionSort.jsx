@@ -58,11 +58,11 @@ export default function SelectionSort() {
     for (let i = 0; i < n - 1; i++) {
       let minIndex = i;
       changeColor(i, "rgb(239 68 68)");
-      await delay(1000);
+      await delay(800);
       changeColor(i, "rgb(5,131,83)");
       for (let j = i + 1; j < n; j++) {
         changeColor(j, "rgb(239 68 68)");
-        await delay(1000);
+        await delay(800);
         if (copy[j].value < copy[minIndex].value) {
           if (minIndex == i) changeColor(minIndex, "rgb(200,250,150)");
           else changeColor(minIndex, "black");
@@ -74,7 +74,7 @@ export default function SelectionSort() {
       }
       if (minIndex !== i) {
         await new Promise((resolve) =>
-          makeFullSwap(i, minIndex, 1000, true, () => {
+          makeFullSwap(i, minIndex, 0, true, () => {
             [copy[i], copy[minIndex]] = [copy[minIndex], copy[i]];
             resolve();
           })
@@ -110,31 +110,58 @@ export default function SelectionSort() {
 
   return (
     <div>
-      {list.length > 0 && (
-        <div className="keys absolute left-0 top-1/2 transform -translate-y-1/2 pl-20">
-          {keys?.map((key) => (
-            <div className="key">
-              <div className="sample" style={key}></div>
-              <span>{key.label}</span>
-            </div>
-          ))}
-        </div>
-      )}
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Selection Sort</h2>
-        <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} showControls={controls} />
+        <div className="keys-and-list flex w-full gap-10">
+          {list.length > 0 && (
+            <div className="keys pl-10" style={{ minWidth: "260px" }}>
+              {keys?.map((key) => (
+                <div className="key">
+                  <div className="sample" style={key}></div>
+                  <span>{key.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <div
+            className="list-container flex-grow"
+            style={{ maxWidth: "calc(100% - 210px)" }}
+          >
+            <List
+              list={list}
+              setList={setList}
+              setSwapList={setSwap}
+              swapList={swap}
+              areas={areas}
+              setAreas={setAreas}
+              showControls={controls}
+            />
+          </div>
+        </div>
         {controls && (
-          <div className="flex gap-5">
-            <motion.button onClick={handleSelectionSort} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32">
+          <div className="flex gap-5 mt-[55px]">
+            <motion.button
+              onClick={handleSelectionSort}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
+            >
               Sort
             </motion.button>
-            <motion.button onClick={handleGenerateRandomList} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40">
+            <motion.button
+              onClick={handleGenerateRandomList}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
+            >
               Generate
             </motion.button>
           </div>
         )}
         {!controls && (
-          <motion.button onClick={handleStop} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32">
+          <motion.button
+            onClick={handleStop}
+            whileHover={{ scale: 1.1 }}
+            className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32"
+          >
             Reset
           </motion.button>
         )}

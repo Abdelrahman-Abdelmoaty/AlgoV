@@ -77,18 +77,15 @@ export default function SortingAlgorithm() {
       let j = i - 1;
 
       changeColor(i, "rgb(239 68 68)");
-      console.log(copy[j].value, key);
       while (j >= 0 && copy[j].value > key) {
-        console.log("in");
         resetColors(0, n - 1);
         await new Promise((resolve) =>
-          makeFullSwap(j, j + 1, 1000, true, () => {
+          makeFullSwap(j, j + 1, 0, true, () => {
             resolve();
           })
         );
         swap2(copy, j, j + 1);
         j = j - 1;
-        console.log("out");
       }
       await delay(1000);
       for (let k = i; k >= 0; k--) changeColor(k, "rgb(5,131,83)");
@@ -123,31 +120,58 @@ export default function SortingAlgorithm() {
   };
   return (
     <div>
-      {list.length > 0 && (
-        <div className="keys absolute left-0 top-1/2 transform -translate-y-1/2 pl-20">
-          {keys?.map((key) => (
-            <div className="key">
-              <div className="sample" style={key}></div>
-              <span>{key.label}</span>
-            </div>
-          ))}
-        </div>
-      )}
       <div className="flex flex-col items-center">
         <h2 className="algorithm-title">Insertion Sort</h2>
-        <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} showControls={controls} />
+        <div className="keys-and-list flex w-full gap-10">
+          {list.length > 0 && (
+            <div className="keys pl-10" style={{ minWidth: "260px" }}>
+              {keys?.map((key) => (
+                <div className="key">
+                  <div className="sample" style={key}></div>
+                  <span>{key.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <div
+            className="list-container flex-grow"
+            style={{ maxWidth: "calc(100% - 210px)" }}
+          >
+            <List
+              list={list}
+              setList={setList}
+              setSwapList={setSwap}
+              swapList={swap}
+              areas={areas}
+              setAreas={setAreas}
+              showControls={controls}
+            />
+          </div>
+        </div>
         {controls && (
-          <div className="flex gap-5">
-            <motion.button onClick={handleInsertionSort} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32">
+          <div className="flex gap-5 mt-[55px]">
+            <motion.button
+              onClick={handleInsertionSort}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
+            >
               Sort
             </motion.button>
-            <motion.button onClick={handleGenerateRandomList} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40">
+            <motion.button
+              onClick={handleGenerateRandomList}
+              whileHover={{ scale: 1.1 }}
+              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
+            >
               Generate
             </motion.button>
           </div>
         )}
         {!controls && (
-          <motion.button onClick={handleStop} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32">
+          <motion.button
+            onClick={handleStop}
+            whileHover={{ scale: 1.1 }}
+            className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32"
+          >
             Reset
           </motion.button>
         )}

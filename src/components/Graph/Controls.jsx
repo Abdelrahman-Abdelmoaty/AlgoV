@@ -2,13 +2,14 @@ import "../../styles/dfs.css";
 import { useEffect, useState } from "react";
 import { ReactComponent as LeftArrow } from "../../assets/svg/left-arrow.svg";
 import { ReactComponent as RightArrow } from "../../assets/svg/right-arrow.svg";
+import { motion } from "framer-motion";
 
 export default function Controls({ start, startV, setStart, next, back, end }) {
   const [auto, setAuto] = useState(false);
   const [speed, setSpeed] = useState(5);
   const [error, setError] = useState(false);
   const [finished, setFinished] = useState(false);
-
+  const [value, setValue] = useState('')
   useEffect(() => {
     if (auto && speed < 11 && !end && startV)
       setTimeout(() => {
@@ -21,6 +22,7 @@ export default function Controls({ start, startV, setStart, next, back, end }) {
 
   return (
     <div>
+      <h2 className="algorithm-title">Start traversing</h2>
       <div className="controls">
         <div className="start">
           {setStart !== undefined ? (
@@ -28,8 +30,9 @@ export default function Controls({ start, startV, setStart, next, back, end }) {
               <span>Start Vertex:</span>
               <input
                 className="start-vertex"
-                value={startV}
+                value={value}
                 onChange={(e) => {
+                  setValue(e.target.value);
                   setStart(e.target.value);
                   setError(false);
                 }}
@@ -43,15 +46,25 @@ export default function Controls({ start, startV, setStart, next, back, end }) {
             onClick={() => {
               const exist = start();
               setError(exist);
+              startV= value;
             }}
           >
             start
           </button>
         </div>
         {error && (
-          <p className="text-start block text-red-500 mt-1 font-semibold">
+          <div className="flex items-center">
+                      <p className="text-start block text-red-500 mt-1 font-semibold">
             Node doesn't exist
           </p>
+          <motion.button onClick={(e) => {
+                  setStart('');
+                  setValue('');
+                  setError(false);
+                }} whileHover={{ scale: 1.1 }} className="bg-red-500 px-2 py-1 mx-auto rounded-md text-white">
+          clear
+        </motion.button>
+          </div>
         )}
         <div className="type">
           <button

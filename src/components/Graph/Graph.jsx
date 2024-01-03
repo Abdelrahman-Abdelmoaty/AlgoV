@@ -104,6 +104,7 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
         })}
       </GraphArea>
       <div className="flex flex-col items-center gap-5 justify-center w-[300px] text-center ml-5">
+      <h2 className="algorithm-title">Build your graph</h2>
         <div className="w-full">
           <form onSubmit={handleAddNode} className="flex items-center justify-between gap-5">
             <motion.input
@@ -123,6 +124,10 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
           </form>
           {error && <p className="text-start block text-red-500 mt-1 font-semibold">Please enter a number!</p>}
         </div>
+        {!nodes.length && (
+        <motion.button onClick={handleRandomize} whileHover={{ scale: 1.1 }} className="w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md bg-[rgb(5,131,83)] text-white">
+          Generate
+        </motion.button> )}
         <motion.div
           onClick={() => {
             setDirected((prev) => !prev);
@@ -143,13 +148,14 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
         >
           weighted
         </motion.div> */}
-        <motion.button onClick={handleRandomize} whileHover={{ scale: 1.1 }} className="w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md bg-[rgb(5,131,83)] text-white">
-          Generate
-        </motion.button>
         <motion.button onClick={handleClearGraph} whileHover={{ scale: 1.1 }} className="w-full rounded-lg py-3 capitalize text-xl font-semibold shadow-md bg-red-500 text-white">
           Clear Graph
         </motion.button>
-        <p className="font-semibold text-start">To start an edge double click on a source node and click on the destination node!</p>
+        {nodes.length > 0 && (    
+          <div>    
+        <p className="font-semibold text-start mr-auto">To move a node: click and drag</p>
+        <p className="font-semibold text-start">To create an edge: double click on the source node then click on the destination</p>
+        </div>)}
       </div>
     </div>
   );
