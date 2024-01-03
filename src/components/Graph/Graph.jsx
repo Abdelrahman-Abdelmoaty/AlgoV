@@ -93,7 +93,14 @@ export default function Graph({ nodes, setNodes, edges, setEdges, directed, setD
           );
         })}
         {nodes.map((node, idx) => {
-          return <Node key={idx} node={node} setNodes={setNodes} setEdges={setEdges} activeEdge={activeEdge} setActiveEdge={setActiveEdge} />;
+          return <Node 
+                    key={idx} 
+                    node={node}
+                    setNodes={setNodes}
+                    setEdges={setEdges}
+                    activeEdge={activeEdge}
+                    setActiveEdge={setActiveEdge} 
+                    />
         })}
       </GraphArea>
       <div className="flex flex-col items-center gap-5 justify-center w-[300px] text-center ml-5">

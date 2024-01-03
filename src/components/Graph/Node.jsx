@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
+export default function Node({ node, setNodes, setEdges, activeEdge, setActiveEdge }) {
   const [circle, setCircle] = useState({ cx: node.x, cy: node.y, radius: 30 });
   const strokeWidth = 2;
   const svgGroupElemRef = useRef(null);
@@ -17,13 +17,11 @@ const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
       const initialCircleX = circle.cx;
       const initialCircleY = circle.cy;
 
-      const dragOffsetX = initialMouseX - initialCircleX - svgRect.left;
-      const dragOffsetY = initialMouseY - initialCircleY - svgRect.top;
       const mousemove = (event) => {
         event.preventDefault();
 
-        const newCircleX = event.clientX - svgRect.left - dragOffsetX;
-        const newCircleY = event.clientY - svgRect.top - dragOffsetY;
+        const newCircleX = event.clientX - initialMouseX + initialCircleX;
+        const newCircleY = event.clientY - initialMouseY + initialCircleY;
 
         setCircle((prevCircle) => ({
           ...prevCircle,
@@ -74,6 +72,4 @@ const Node = ({ node, setNodes, setEdges, activeEdge, setActiveEdge }) => {
       </text>
     </motion.g>
   );
-};
-
-export default Node;
+}

@@ -11,7 +11,9 @@ export default function Edge({ edge, directed, weighted }) {
 
   return (
     <motion.g>
-      <motion.line initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5 }} x1={edge.src.x} y1={edge.src.y} x2={edge.dest.x} y2={edge.dest.y} stroke="black" strokeWidth={4} />
+      <motion.line initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} 
+      transition={{ duration: 0.5 }} x1={edge.src.x} y1={edge.src.y} x2={edge.dest.x} y2={edge.dest.y} 
+      stroke="black" strokeWidth={4} />
       {directed && (
         <motion.path
           initial={{ opacity: 0 }}
@@ -24,7 +26,8 @@ export default function Edge({ edge, directed, weighted }) {
         ></motion.path>
       )}
       {weighted && (
-        <motion.text x={midX - 15} y={midY - 15} textAnchor="middle" alignmentBaseline="middle" fontSize="16" fontWeight="bold" fill="black">
+        <motion.text x={midX - 15} y={midY - 15} textAnchor="middle" 
+        alignmentBaseline="middle" fontSize="16" fontWeight="bold" fill="black">
           {50}
         </motion.text>
       )}

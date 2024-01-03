@@ -49,13 +49,10 @@ export default function BubbleSort() {
       changeColor(i);
       changeColor(j);
       swapFlag && setSwap((prev) => [...prev, { i, j }]);
-      setTimeout(
-        () => {
-          removeColor(i);
-          removeColor(j);
-        },
-        swapFlag ? 4500 : 1000
-      );
+      setTimeout(() => {
+        removeColor(i);
+        removeColor(j);
+      }, time - 500);
     }, time);
   };
   const handleSort = () => {
