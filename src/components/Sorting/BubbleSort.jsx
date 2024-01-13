@@ -53,10 +53,13 @@ export default function BubbleSort() {
       changeColor(i);
       changeColor(j);
       swapFlag && setSwap((prev) => [...prev, { i, j }]);
-      setTimeout(() => {
-        removeColor(i);
-        removeColor(j);
-      }, time - 500);
+      setTimeout(
+        () => {
+          removeColor(i);
+          removeColor(j);
+        },
+        swapFlag ? 4500 : 1500
+      );
     }, time);
   };
   const handleSort = () => {
@@ -69,11 +72,11 @@ export default function BubbleSort() {
         if (copy[j] > copy[j + 1]) {
           makeFullSwap(j, j + 1, time, true);
           [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
-          time += 5000;
           swapped = true;
+          time += 5000;
         } else {
           makeFullSwap(j, j + 1, time, false);
-          time += 1500;
+          time += 2000;
         }
       }
       if (swapped === false) break;
@@ -95,40 +98,20 @@ export default function BubbleSort() {
   return (
     <div className="flex flex-col items-center">
       <h2 className="algorithm-title">Bubble Sort</h2>
-      <List
-        list={list}
-        setList={setList}
-        setSwapList={setSwap}
-        swapList={swap}
-        areas={areas}
-        setAreas={setAreas}
-        showControls={showControls}
-      />
+      <List list={list} setList={setList} setSwapList={setSwap} swapList={swap} areas={areas} setAreas={setAreas} showControls={showControls} />
       <div className="flex gap-5 mt-[55px]">
         {showControls && (
           <>
-            <motion.button
-              onClick={handleSort}
-              whileHover={{ scale: 1.1 }}
-              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32"
-            >
+            <motion.button onClick={handleSort} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-32">
               Sort
             </motion.button>
-            <motion.button
-              onClick={handleGenerateRandomList}
-              whileHover={{ scale: 1.1 }}
-              className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40"
-            >
+            <motion.button onClick={handleGenerateRandomList} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-[rgb(5,131,83)] rounded-lg px-3 py-3 capitalize w-40">
               Generate
             </motion.button>
           </>
         )}
         {!showControls && (
-          <motion.button
-            onClick={handleStop}
-            whileHover={{ scale: 1.1 }}
-            className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32"
-          >
+          <motion.button onClick={handleStop} whileHover={{ scale: 1.1 }} className=" font-semibold shadow-md text-xl text-white bg-red-500 rounded-lg px-3 py-3 capitalize w-32">
             Reset
           </motion.button>
         )}
