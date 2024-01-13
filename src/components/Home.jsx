@@ -13,16 +13,27 @@ export default function Home() {
         ALGORITHMS IN ACTION
       </h2>
       <div className="w-full algorithms flex justify-evenly">
-        <Link to="/graph/bfs" className="flex flex-col items-center gap-5">
-          <img src={graphImg} alt="graph" className="algorithm w-[120px]" />
-          <span>Graph Algorithms</span>
+        <Link
+          to="/graph/bfs"
+          className="flex flex-col items-center gap-5"
+        >
+          <img
+            src={graphImg}
+            alt="graph"
+            className="algorithm w-[120px] hover:scale-110 ease-in-out duration-200"
+          />
+          <p>Graph Algorithms</p>
         </Link>
         <Link
           to="/sorting/bubble-sort"
           className="flex flex-col items-center gap-5"
         >
-          <img src={sortingImg} alt="graph" className="algorithm w-[120px]" />
-          <span>Sorting Algorithms</span>
+          <img
+            src={sortingImg}
+            alt="graph"
+            className="algorithm w-[120px] hover:scale-110 ease-in-out duration-200"
+          />
+          <p>Sorting Algorithms</p>
         </Link>
       </div>
       <p className="statement border-2 border-[rgb(5,131,83)] p-[20px] text-[rgb(5,131,83)] text-[32px] w-[1000px] text-center">

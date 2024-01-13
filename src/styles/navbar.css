@@ -1,60 +1,57 @@
-.navbar-component{
+.navbar-component {
 }
-    .burger{
-        flex-direction: column;
-        gap: 4px;
-        display: none;
-    }
-    .burger > div{
-        height: 3px;
-        width: 30px;
-        background: white;
-        border-radius: 10px;
-    }
-@media screen and (max-width: 768px){
-    .navbar-component{
-        padding-right: 3rem;
-        padding-left: 3rem;
-    }
-    .main-nav:not(.show){
-        display: none;
-    }
-    .main-nav{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-    }
-    .main-nav > ul{
-        /* height: 100%;
+.burger {
+  flex-direction: column;
+  gap: 4px;
+  display: none;
+}
+.burger > div {
+  height: 3px;
+  width: 30px;
+  background: white;
+  border-radius: 10px;
+}
+@media screen and (max-width: 768px) {
+  .navbar-component {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+  .main-nav:not(.show) {
+    display: none;
+  }
+  .main-nav {
+    position: fixed;
+    z-index: 1000;
+    inset: 0 0 0 0%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  .main-nav > ul {
+    /* height: 100%;
         width: 100%; */
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 1000;
-    }
-    .main-nav > ul li{
-        position: unset;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .main-nav .sub-menu{
-        display: flex;
-        position: unset;
-        transform: none;
-    }
-    .burger{
-        display: flex;
-    }
-
-
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1000;
+  }
+  .main-nav > ul li {
+    position: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .main-nav .sub-menu {
+    display: flex;
+    position: unset;
+    transform: none;
+  }
+  .burger {
+    display: flex;
+  }
 }
